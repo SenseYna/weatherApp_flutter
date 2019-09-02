@@ -1,6 +1,8 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
+import 'getdata.dart';
+
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context){
@@ -10,7 +12,7 @@ class HomePage extends StatelessWidget {
         children: [
           Positioned.fill(
               child: FlareActor("assets/Penguin.flr",
-                  alignment: Alignment.custom,
+                  alignment: Alignment.center,
                   isPaused: _isPaused,
                   fit: BoxFit.cover,
                   animation: "walk",
@@ -36,10 +38,7 @@ class HomePage extends StatelessWidget {
                       child: new Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          new Text("Sao em vô tình, anh quá, em ơiiiiiiiiiii",
-                              style: TextStyle(color: Colors.white, fontSize: 20)
-                              
-                              ),
+                           Info()
                         ],
                       )),
                 )

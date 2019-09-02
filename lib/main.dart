@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flare_flutter/flare_controller.dart';
 import 'package:flare_flutter/flare.dart';
