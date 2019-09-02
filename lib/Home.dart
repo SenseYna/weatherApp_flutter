@@ -1,7 +1,8 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
-import 'getdata.dart';
+import 'fetchdata.dart';
+// import 'getdata.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -37,6 +38,7 @@ class HomePage extends StatelessWidget {
                       ),
                       child: new Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: <Widget>[
                            Info()
                         ],
