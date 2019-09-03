@@ -4,10 +4,12 @@ import 'package:flare_flutter/flare.dart';
 import 'package:flare_dart/math/mat2d.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app_flutter/Map.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import './Home.dart';
 import './Map.dart';
 import './About.dart';
-
+import './Chart.dart';
 
 void main() => runApp(new MyApp());
 
@@ -38,11 +40,17 @@ class _MyHomePageState extends State<MyHomePage> with FlareController {
 
   // https://www.youtube.com/watch?v=n_FRmFm9Tyw
   int _selectedPage = 0;
+  final List<charts.Series> seriesList = [
+    
+  ];
+  final bool animate = true;
+
   final _pageOptions = [
       HomePage(),
       MapPage(),
+      ChartPage(),
       AboutPage(),
-  ];
+  ];  
 
 
   static const TextStyle optionStyle =
@@ -72,6 +80,7 @@ class _MyHomePageState extends State<MyHomePage> with FlareController {
       appBar: new AppBar(title: new Text(widget.title)),
       body: _pageOptions[_selectedPage],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: _selectedPage,
         onTap: (int index){
           setState((){
@@ -87,11 +96,18 @@ class _MyHomePageState extends State<MyHomePage> with FlareController {
             icon: Icon(Icons.map),
             title: Text('Map'),
           ),
+           BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.chartLine),
+            
+            title: Text('Chart'),
+          ),
           BottomNavigationBarItem(
             icon: Icon(Icons.info),
             title: Text('About'),
           ),
+         
         ],
+        
       ),
     );
   }
