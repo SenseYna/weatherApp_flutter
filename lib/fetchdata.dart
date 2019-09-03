@@ -6,6 +6,8 @@ import 'package:http/http.dart' as http;
 
 import 'package:geolocator/geolocator.dart';
 
+import 'speakdata.dart';
+
 class Info extends StatefulWidget {
   Info({Key key}) : super(key: key);
 
@@ -14,7 +16,7 @@ class Info extends StatefulWidget {
 }
 
 MyData _myData = MyData();
-
+Speaker speaker = Speaker();
 class _InfoState extends State<Info> {
   // var myData;
   // MyData get myData {
@@ -70,6 +72,7 @@ class _InfoState extends State<Info> {
   }
 
   dispose() {
+    speaker.top();
     super.dispose();
   }
 
@@ -80,6 +83,8 @@ class _InfoState extends State<Info> {
     } else if (_myData.displayName != null &&
         _myData.temperature != null &&
         _myData.uvIndex != null) {
+          String text = "Xin chào Minh, Vị trí hiện tại của bạn là ${_myData.displayName.toString()}. Nhiệt độ hiện tại là ${_myData.temperature.toStringAsFixed(2)} °C, chỉ số tia cực tím là: ${_myData.uvIndex.toString()}. Khoảng 1 giờ sau, Nhiệt độ sẽ thay đổi: ${_myData.nextTemperature.toStringAsFixed(2)} °C với chỉ số tia cực tím là ${_myData.nextuvIndex.toString()}. Chúc bạn sắp xếp được khoảng thời gian ra ngoài hợp lý.";
+          speaker.speak(text);
       return ListBody(children: <Widget>[        
           Text("Vị trí: " + _myData.displayName.toString(),
               style: TextStyle(color: Colors.white, fontSize: 16), textAlign: TextAlign.left),
