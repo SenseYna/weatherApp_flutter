@@ -18,17 +18,13 @@ class _TestState extends State<ChartPage> {
 
   _generateData() async {
     await _myLocation.getPos();
-
-    var getWeather = await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
-    print(
-          _weather.infos[2].temperature.toString() + ' Test' );
+    await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
+  
     List<Sales> datatemperature = new List();
     datatemperature.add(Sales(0, 0));
     for (int i = 0; i < 24; i++) {
-      print(
-          getWeather[i].temperature.toString() + ' Chart' + (i.toString()));
+      datatemperature.add(Sales(i + 1, _weather.infos[i].temperature));
     }
-    // datatemperature.add(Sales(i+1, _weather.infos[i].temperature));
 
     // _seriesLineData.add(
     //   charts.Series(

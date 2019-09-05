@@ -31,26 +31,29 @@ class Weather {
     curently.uvIndex = json['currently']['uvIndex'];
     
     List data = json['hourly']['data'];
+    for(int i = 0; i < 24; i++){
     Info temp = Info();
-    for(int i = 0; i < 23; i++){
       temp.summary = data[i]['summary'];
       temp.temperature = (data[i]['temperature'] - 32) * 5 / 9;
       temp.uvIndex = data[i]['uvIndex'];
-      this.infos.add(temp);
-      print(infos[i].temperature.toString()+ ' weather');
+      infos.add(temp);
+      // print(infos[i].temperature.toString()+ ' weather');
     }
+    // for(int i = 0; i < 24; i++){
+    //   print(infos[i].temperature.toString()+ ' done');
+    // }
   }
 
-  Future fetchData(String lat, String lon) async {
+fetchData(String lat, String lon) async {
     //Lấy dữ liệu thời tiết
     var resLinkToData = await http.get(getLinkToData(lat, lon));
     var data = json.decode(resLinkToData.body);
-    await _mapData(data);
+    _mapData(data);
     //Lấy dữ liệu tên hiển thị
     var resLinkToName = await http.get(getLinkToName(lat, lon));
     var name = json.decode(resLinkToName.body);
     this.displayName = name['display_name']; 
-    return infos;
+
   }
 }
 
