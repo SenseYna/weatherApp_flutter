@@ -18,7 +18,6 @@ class _WeatherWidgetState extends State<WeatherWidget> {
 
   _init() async {
     await _myLocation.getPos();
-    
     await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
     setState(() {
       _weather = _weather;

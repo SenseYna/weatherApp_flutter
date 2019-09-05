@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
         children: [
           Positioned.fill(
               child: FlareActor("assets/Penguin.flr",
-                  alignment: Alignment.custom,
+                  alignment: Alignment.center,
                   isPaused: _isPaused,
                   fit: BoxFit.cover,
                   animation: "walk",

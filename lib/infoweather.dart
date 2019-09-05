@@ -31,8 +31,8 @@ class Weather {
     curently.uvIndex = json['currently']['uvIndex'];
     
     List data = json['hourly']['data'];
+    for(int i = 0; i < 48; i++){
     Info temp = Info();
-    for(int i = 0; i < 24; i++){
       temp.summary = data[i]['summary'];
       temp.temperature = (data[i]['temperature'] - 32) * 5 / 9;
       temp.uvIndex = data[i]['uvIndex'];
@@ -40,7 +40,7 @@ class Weather {
     }
   }
 
-  fetchData(String lat, String lon) async {
+fetchData(String lat, String lon) async {
     //Lấy dữ liệu thời tiết
     var resLinkToData = await http.get(getLinkToData(lat, lon));
     var data = json.decode(resLinkToData.body);

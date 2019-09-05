@@ -18,52 +18,45 @@ class _TestState extends State<ChartPage> {
 
   _generateData() async { 
     await _myLocation.getPos();
-
     await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
+  
     List<Sales> datatemperature = new List();
-    datatemperature.add(Sales(0,0));
+    int j=0;
+    for (int i = 0; i < 48; i) {
+      datatemperature.add(Sales(i, _weather.infos[i].temperature));
       
-      print(_weather.infos[12].temperature);
-      // datatemperature.add(Sales(i+1, _weather.infos[i].temperature));
-    
-    // _seriesLineData.add(
-    //   charts.Series(
-    //     colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff990099)),
-    //     id: 'Air Pollution',
-    //     data: linesalesdata,
-    //     domainFn: (Sales sales, _) => sales.yearval,
-    //     measureFn: (Sales sales, _) => sales.salesval,
-    //   ),
-    // );
-    // _seriesLineData.add(
-    //   charts.Series(
-    //     colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff109618)),
-    //     id: 'Air Pollution',
-    //     data: linesalesdata1,
-    //     domainFn: (Sales sales, _) => sales.yearval,
-    //     measureFn: (Sales sales, _) => sales.salesval,
-    //   ),
-    // );
+    }
+
+  //  var linesalesdata2 = [
+  //     new Sales(0, 20),
+  //     new Sales(1, 24),
+  //     new Sales(2, 25),
+  //     new Sales(3, 40),
+  //     new Sales(4, 45),
+  //     new Sales(5, 60),
+  //   ];
     
     _seriesLineData = List<charts.Series<Sales, int>>();
     _seriesLineData.add(
       charts.Series(
         colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffff9900)),
         id: 'Air Pollution',
+        //data: datatemperature,
         data: datatemperature,
         domainFn: (Sales sales, _) => sales.yearval,
         measureFn: (Sales sales, _) => sales.salesval,
       ),
     );
-    setState(() {
-     _seriesLineData = _seriesLineData; 
-    });
+   setState(() {
+
+   });
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _seriesLineData = List<charts.Series<Sales, int>>();
     _generateData();
    
   }
