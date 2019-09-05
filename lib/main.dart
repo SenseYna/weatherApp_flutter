@@ -11,7 +11,11 @@ import './Map.dart';
 import './About.dart';
 import './Chart.dart';
 
-void main() => runApp(new MyApp());
+void main(){
+runApp(MyApp());
+  }
+
+// void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

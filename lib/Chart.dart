@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'infolocation.dart';
+import 'infoweather.dart';
 
 class ChartPage extends StatefulWidget {
   final Widget child;
@@ -11,45 +13,23 @@ class ChartPage extends StatefulWidget {
 
 class _TestState extends State<ChartPage> {
   List<charts.Series<Sales, int>> _seriesLineData;
+  MyLocation _myLocation = new MyLocation();
+  Weather _weather = new Weather();
 
-  _generateData() {
-    var linesalesdata = [
-      new Sales(0, 45),
-      new Sales(1, 56),
-      new Sales(2, 55),
-      new Sales(3, 60),
-      new Sales(4, 61),
-      new Sales(5, 70),
-    ];
-    var linesalesdata1 = [
-      new Sales(0, 35),
-      new Sales(1, 46),
-      new Sales(2, 45),
-      new Sales(3, 50),
-      new Sales(4, 51),
-      new Sales(5, 60),
-    ];
+  _generateData() async {
+    await _myLocation.getPos();
 
-    var linesalesdata2 = [
-      new Sales(0, 0),
-      new Sales(1, 24),
-      new Sales(2, 25),
-      new Sales(3, 40),
-      new Sales(4, 45),
-      new Sales(5, 60),
-      new Sales(6, 20),
-      new Sales(7, 24),
-      new Sales(8, 25),
-      new Sales(9, 40),
-      new Sales(10, 45),
-      new Sales(11, 60),
-      new Sales(12, 20),
-      new Sales(13, 24),
-      new Sales(14, 25),
-      new Sales(15, 40),
-      new Sales(16, 45),
-      new Sales(17, 60),
-    ];
+    var getWeather = await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
+    print(
+          _weather.infos[2].temperature.toString() + ' Test' );
+    List<Sales> datatemperature = new List();
+    datatemperature.add(Sales(0, 0));
+    for (int i = 0; i < 24; i++) {
+      print(
+          getWeather[i].temperature.toString() + ' Chart' + (i.toString()));
+    }
+    // datatemperature.add(Sales(i+1, _weather.infos[i].temperature));
+
     // _seriesLineData.add(
     //   charts.Series(
     //     colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff990099)),
@@ -68,22 +48,26 @@ class _TestState extends State<ChartPage> {
     //     measureFn: (Sales sales, _) => sales.salesval,
     //   ),
     // );
+
+    _seriesLineData = List<charts.Series<Sales, int>>();
     _seriesLineData.add(
       charts.Series(
         colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffff9900)),
         id: 'Air Pollution',
-        data: linesalesdata2,
+        data: datatemperature,
         domainFn: (Sales sales, _) => sales.yearval,
         measureFn: (Sales sales, _) => sales.salesval,
       ),
     );
+    setState(() {
+      _seriesLineData = _seriesLineData;
+    });
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _seriesLineData = List<charts.Series<Sales, int>>();
     _generateData();
   }
 
@@ -140,7 +124,7 @@ class _TestState extends State<ChartPage> {
 
 class Sales {
   int yearval;
-  int salesval;
+  double salesval;
 
   Sales(this.yearval, this.salesval);
 }
