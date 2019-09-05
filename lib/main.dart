@@ -1,3 +1,4 @@
+
 import 'package:flare_flutter/flare_controller.dart';
 import 'package:flare_flutter/flare.dart';
 import 'package:flare_dart/math/mat2d.dart';
@@ -10,22 +11,9 @@ import './Map.dart';
 import './About.dart';
 import './Chart.dart';
 
-// import 'infolocation.dart';
-// import 'infoweather.dart';
-
-void main() async {
-  // MyLocation _myLocation = MyLocation();
-  // Weather _weather = Weather();
-  // await _myLocation.getPos();
-
-  // await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
-
-  // for(int i = 0; i < 24; i++){
-  //   print(_weather.infos[i].temperature.toString() + "main " + i.toString());
-  // }
-
+void main(){
 runApp(MyApp());
-}
+  }
 
 // void main() => runApp(new MyApp());
 
@@ -56,15 +44,18 @@ class _MyHomePageState extends State<MyHomePage> with FlareController {
 
   // https://www.youtube.com/watch?v=n_FRmFm9Tyw
   int _selectedPage = 0;
-  final List<charts.Series> seriesList = [];
+  final List<charts.Series> seriesList = [
+    
+  ];
   final bool animate = true;
 
   final _pageOptions = [
-    HomePage(),
-    MapPage(),
-    ChartPage(),
-    AboutPage(),
-  ];
+      HomePage(),
+      MapPage(),
+      ChartPage(),
+      AboutPage(),
+  ];  
+
 
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -95,8 +86,8 @@ class _MyHomePageState extends State<MyHomePage> with FlareController {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: _selectedPage,
-        onTap: (int index) {
-          setState(() {
+        onTap: (int index){
+          setState((){
             _selectedPage = index;
           });
         },
@@ -109,15 +100,18 @@ class _MyHomePageState extends State<MyHomePage> with FlareController {
             icon: Icon(Icons.map),
             title: Text('Map'),
           ),
-          BottomNavigationBarItem(
+           BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.chartLine),
+            
             title: Text('Chart'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.info),
             title: Text('About'),
           ),
+         
         ],
+        
       ),
     );
   }

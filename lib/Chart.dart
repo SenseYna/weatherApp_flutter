@@ -18,32 +18,14 @@ class _TestState extends State<ChartPage> {
 
   _generateData() async {
     await _myLocation.getPos();
+
     await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
-  
     List<Sales> datatemperature = new List();
     datatemperature.add(Sales(0, 0));
     for (int i = 0; i < 24; i++) {
-      datatemperature.add(Sales(i + 1, _weather.infos[i].temperature));
+    datatemperature.add(Sales(i+1, _weather.infos[i].temperature));
     }
 
-    // _seriesLineData.add(
-    //   charts.Series(
-    //     colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff990099)),
-    //     id: 'Air Pollution',
-    //     data: linesalesdata,
-    //     domainFn: (Sales sales, _) => sales.yearval,
-    //     measureFn: (Sales sales, _) => sales.salesval,
-    //   ),
-    // );
-    // _seriesLineData.add(
-    //   charts.Series(
-    //     colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xff109618)),
-    //     id: 'Air Pollution',
-    //     data: linesalesdata1,
-    //     domainFn: (Sales sales, _) => sales.yearval,
-    //     measureFn: (Sales sales, _) => sales.salesval,
-    //   ),
-    // );
 
     _seriesLineData = List<charts.Series<Sales, int>>();
     _seriesLineData.add(
