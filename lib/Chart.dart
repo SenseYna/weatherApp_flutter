@@ -8,24 +8,27 @@ class ChartPage extends StatefulWidget {
 
   ChartPage({Key key, this.child}) : super(key: key);
 
-  _TestState createState() => _TestState();
+  _ChartPageState createState() => _ChartPageState();
 }
 
-class _TestState extends State<ChartPage> {
+class _ChartPageState extends State<ChartPage> {
   List<charts.Series<Sales, int>> _seriesLineData;
-  MyLocation _myLocation = new MyLocation();
-  Weather _weather = new Weather();
+  Weather _weather;
 
-  _generateData() async { 
+  _generateData() async {
+    if (!weatherInstance.isEmpty()) {
+      _weather = weatherInstance;
+    } else {
+      MyLocation _myLocation = new MyLocation();
     await _myLocation.getPos();
-
     await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
-    List<Sales> datatemperature = new List();
-    datatemperature.add(Sales(0, 0));
-    for (int i = 0; i < 24; i++) {
-    datatemperature.add(Sales(i+1, _weather.infos[i].temperature));
     }
-
+    weatherInstance = _weather;
+    List<Sales> datatemperature = new List();
+    int j = 0;
+    for (int i = 0; i < 48; i += 2) {
+      datatemperature.add(Sales(j++, _weather.infos[i].temperature));
+    }
 
     _seriesLineData = List<charts.Series<Sales, int>>();
     _seriesLineData.add(
@@ -38,9 +41,7 @@ class _TestState extends State<ChartPage> {
         measureFn: (Sales sales, _) => sales.salesval,
       ),
     );
-   setState(() {
-
-   });
+    setState(() {});
   }
 
   @override
@@ -49,7 +50,6 @@ class _TestState extends State<ChartPage> {
     super.initState();
     _seriesLineData = List<charts.Series<Sales, int>>();
     _generateData();
-   
   }
 
   Widget build(BuildContext context) {
@@ -64,7 +64,7 @@ class _TestState extends State<ChartPage> {
                 children: <Widget>[
                   Text(''),
                   Text(
-                    'Dự báo nhiệt độ trong ngày',
+                    'Biểu đồ nhiệt độ trong ngày',
                     style:
                         TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),

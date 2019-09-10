@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import 'infolocation.dart';
@@ -12,20 +11,26 @@ class WeatherWidget extends StatefulWidget {
 }
 
 class _WeatherWidgetState extends State<WeatherWidget> {
-  MyLocation _myLocation = MyLocation();
-  Weather _weather = Weather();
+  Weather _weather = new Weather();
   Speaker _speaker = Speaker();
 
   _init() async {
+    if (!weatherInstance.isEmpty()) {
+      _weather = weatherInstance;
+    } else {
+      MyLocation _myLocation = new MyLocation();
     await _myLocation.getPos();
     await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
+    }
+    weatherInstance = _weather;
     setState(() {
       _weather = _weather;
     });
-
-    String text = "Xin chào Minh, Vị trí hiện tại của bạn là ${_weather.displayName.toString()}. Nhiệt độ hiện tại là ${_weather.curently.temperature.toStringAsFixed(2)} °C, chỉ số tia cực tím là: ${_weather.curently.uvIndex.toString()}. Hi vọng bạn sắp xếp được khoảng thời gian ra ngoài hợp lý.";
+    String text =
+        "Xin chào bạn, Vị trí hiện tại của bạn là ${_weather.displayName.toString()}. Nhiệt độ hiện tại là ${_weather.curently.temperature.toStringAsFixed(2)} °C, chỉ số tia cực tím là: ${_weather.curently.uvIndex.toString()}. Hi vọng bạn sắp xếp được khoảng thời gian ra ngoài hợp lý.";
     _speaker.speak(text);
   }
+
   initState() {
     _init();
     super.initState();
@@ -43,28 +48,34 @@ class _WeatherWidgetState extends State<WeatherWidget> {
     } else if (_weather.displayName != null &&
         _weather.curently.temperature != null &&
         _weather.curently.uvIndex != null) {
-       return ListBody(
+      return ListBody(
         children: <Widget>[
           Text("Vị trí: " + _weather.displayName.toString(),
               style: TextStyle(color: Colors.white, fontSize: 16),
               textAlign: TextAlign.left),
-          Text("Nhiệt độ: " + _weather.curently.temperature.toStringAsFixed(2) + "°C",
+          Text(
+              "Nhiệt độ: " +
+                  _weather.curently.temperature.toStringAsFixed(2) +
+                  "°C",
               style: TextStyle(color: Colors.white, fontSize: 16),
               textAlign: TextAlign.left),
-          Text("Tia uv: " + _weather.curently.uvIndex.toString(),
+          Text("Chỉ số tia cực tím: " + _weather.curently.uvIndex.toString(),
               style: TextStyle(color: Colors.white, fontSize: 16),
               textAlign: TextAlign.left),
-          // Text(""),
+          Text("Dự báo trong ngày: " + _weather.daySummary.toString(),
+              style: TextStyle(color: Colors.white, fontSize: 16),
+              textAlign: TextAlign.left),
+          Text(""),
           // Text("Dự đoán 1 giờ sau:",
           //     style: TextStyle(
           //         color: Colors.white,
           //         fontSize: 16,
           //         fontWeight: FontWeight.bold),
           //     textAlign: TextAlign.left),
-          // Text("Nhiệt độ: " + _myData.nextTemperature.toStringAsFixed(2) + "°C",
+          // Text("Nhiệt độ: " + _weather.infos[].toStringAsFixed(2) + "°C",
           //     style: TextStyle(color: Colors.white, fontSize: 16),
           //     textAlign: TextAlign.left),
-          // Text("Tia uv: " + _myData.nextuvIndex.toString(),
+          // Text("Tia uv: " + _weather.nextuvIndex.toString(),
           //     style: TextStyle(color: Colors.white, fontSize: 16),
           //     textAlign: TextAlign.left),
         ],
