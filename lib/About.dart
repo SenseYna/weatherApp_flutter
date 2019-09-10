@@ -110,12 +110,13 @@ class AboutPage extends StatelessWidget {
             mainAxisSpacing: 4.0,
             shrinkWrap: true,
             children: <Widget>[
-              _buildCard('Tom', 'Available', 1),
-              _buildCard('Tom', 'Away', 2),
-              _buildCard('Tom', 'Away', 3),
-              _buildCard('Tom', 'Available', 4),
-              _buildCard('Tom', 'Away', 5),
-              _buildCard('Tom', 'Available', 6),
+              _buildCard('Thầy Long', 'Giáo viên hướng dẫn', 1, 'https://img.thuthuatphanmem.vn/uploads/2018/09/28/beautiful-dragons_024751662.jpg','- Sinh viên năm 3 \n- Trường Đh Công nghệ thông tin\n- Khoa Công nghệ Phần mềm\n- Thành tích: Hổ báo trường mẫu giáo'),
+              _buildCard('Đinh Xuân Anh', 'Trưởng nhóm', 2, 'https://i.imgur.com/3O1WBaF.png','- Sinh viên năm 3 \n- Trường Đh Khoa học xã hội và Nhân văn\n- Khoa Địa lý\n- Thành tích: Hổ báo trường mẫu giáo'),
+              _buildCard('Nguyễn Thị Hồng Hạnh', 'Nghiên cứu địa lý', 3, 'https://i.imgur.com/cpeLKt6.png','- Sinh viên năm 3 \n- Trường Đh Khoa học xã hội và Nhân văn\n- Khoa Địa lý\n- Thành tích: Hổ báo trường mẫu giáo'),
+              _buildCard('Hồ Trần Thiện Đạt', 'Dev App', 4, 'https://i.imgur.com/bucPOYQ.jpg','- Sinh viên năm 3 \n- Trường Đh Công nghệ thông tin\n- Khoa Công nghệ Phần mềm\n- Thành tích: Hổ báo trường mẫu giáo'),
+              _buildCard('Đào Hữu Duy Quân', 'Dev Web', 5, 'https://i.imgur.com/GwMjOBI.png','- Sinh viên năm 3 \n- Trường Đh Công nghệ thông tin\n- Khoa Công nghệ Phần mềm\n- Thành tích: Hổ báo trường mẫu giáo'),
+              _buildCard('Nguyễn Phương Tính', 'Designer', 6  , 'https://i.imgur.com/UJnLLgy.png','- Sinh viên năm 3 \n- Trường Đh Công nghệ thông tin\n- Khoa Công nghệ Phần mềm\n- Thành tích: Hổ báo trường mẫu giáo'),
+              
 
             ],
           )
@@ -123,7 +124,7 @@ class AboutPage extends StatelessWidget {
       );
 
   }
-  Widget _buildCard(String name, String status, int cardIndex) {
+  Widget _buildCard(String name, String status, int cardIndex, String url, String about) {
     return Card( 
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0)
@@ -131,7 +132,7 @@ class AboutPage extends StatelessWidget {
       elevation: 7.0,
       child: Column(
         children: <Widget>[
-          SizedBox(height: 12.0),
+          SizedBox(height: 24.0),
           Stack(
             children: <Widget>[
               Container(
@@ -142,33 +143,19 @@ class AboutPage extends StatelessWidget {
                   color: Colors.green,
                   image: DecorationImage(
                     image: NetworkImage(
-                      'https://pixel.nymag.com/imgs/daily/vulture/2017/06/14/14-tom-cruise.w700.h700.jpg'
+                      url,
                     )
                   )
                 ),
               ),
-              Container(
-                margin: EdgeInsets.only(left: 40.0),
-                height: 20.0,
-                width: 20.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30.0),
-                  color: status == 'Away' ? Colors.amber : Colors.green,
-                  border: Border.all(
-                    color: Colors.white,
-                    style: BorderStyle.solid,
-                    width: 2.0
-                  )
-                ),
-              )
-            ]),
+                ]),
               SizedBox(height: 8.0),
               Text(
                 name,
                 style: TextStyle(
                   fontFamily: 'Quicksand',
                   fontWeight: FontWeight.bold,
-                  fontSize: 15.0,
+                  fontSize: 12.0,
                 ),
               ),
               SizedBox(height: 5.0),
@@ -177,16 +164,16 @@ class AboutPage extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'Quicksand',
                   fontWeight: FontWeight.bold,
-                  fontSize: 12.0,
+                  fontSize: 10.0,
                   color: Colors.grey
                 ),
               ),
-              SizedBox(height: 15.0),
+              SizedBox(height: 8.0),
               Expanded(
                 child: Container(
                   width: 175.0,
                   decoration: BoxDecoration(
-                    color: status == 'Away' ? Colors.grey: Colors.green,
+                    color: Colors.green,
                     borderRadius: BorderRadius.only
                     (
                       bottomLeft: Radius.circular(10.0),
@@ -194,9 +181,9 @@ class AboutPage extends StatelessWidget {
                   ),
                 ),
                 child: Center(
-                  child: Text('Request',
+                  child: Text('Detail',
                   style: TextStyle(
-                    color: Colors.white, fontFamily: 'Quicksand'
+                    color: Colors.white, fontFamily: 'Quicksand', fontSize: 15.0,
                   ),
                 ),
               )

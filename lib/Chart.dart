@@ -22,8 +22,8 @@ class _TestState extends State<ChartPage> {
   
     List<Sales> datatemperature = new List();
     int j=0;
-    for (int i = 0; i < 48; i) {
-      datatemperature.add(Sales(i, _weather.infos[i].temperature));
+    for (int i = 0; i < 48; i+=2) {
+      datatemperature.add(Sales(j++, _weather.infos[i].temperature));
       
     }
 
@@ -73,7 +73,7 @@ class _TestState extends State<ChartPage> {
                 children: <Widget>[
                   Text(''),
                   Text(
-                    'Dự báo nhiệt độ trong ngày',
+                    'Biểu đồ nhiệt độ trong ngày',
                     style:
                         TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
@@ -94,6 +94,8 @@ class _TestState extends State<ChartPage> {
                               behaviorPosition: charts.BehaviorPosition.start,
                               titleOutsideJustification:
                                   charts.OutsideJustification.middleDrawArea),
+                              
+                              
                           new charts.ChartTitle(
                             '',
                             behaviorPosition: charts.BehaviorPosition.end,
