@@ -16,7 +16,7 @@ class _TestState extends State<ChartPage> {
   MyLocation _myLocation = new MyLocation();
   Weather _weather = new Weather();
 
-  _generateData() async {
+  _generateData() async { 
     await _myLocation.getPos();
 
     await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
@@ -32,21 +32,24 @@ class _TestState extends State<ChartPage> {
       charts.Series(
         colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffff9900)),
         id: 'Air Pollution',
+        //data: datatemperature,
         data: datatemperature,
         domainFn: (Sales sales, _) => sales.yearval,
         measureFn: (Sales sales, _) => sales.salesval,
       ),
     );
-    setState(() {
-      _seriesLineData = _seriesLineData;
-    });
+   setState(() {
+
+   });
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _seriesLineData = List<charts.Series<Sales, int>>();
     _generateData();
+   
   }
 
   Widget build(BuildContext context) {
