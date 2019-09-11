@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 
-class AboutPage extends StatelessWidget {
+void main() {
+  runApp(new ExpansionTileSample());
+}
 
-  
+class ExpansionTileSample extends StatefulWidget {
   @override
+  ExpansionTileSampleState createState() => new ExpansionTileSampleState();
+}
+
+class ExpansionTileSampleState extends State<ExpansionTileSample> {
   String titleMembers = 'Members';
+
+  @override
   Widget build(BuildContext context) {
-    return new ListView(
+    return new MaterialApp(
+      home: new Scaffold(
+        appBar: new AppBar(
+          title: const Text('ExpansionTile'),
+        ),
+        body: new ListView(
           shrinkWrap: true,
           children: <Widget>[
             new ExpansionTile(
@@ -70,22 +83,19 @@ class AboutPage extends StatelessWidget {
               ],
             ),
           ],
-            );
-        
-    }
+        ),
+      ),
+    );
+  }
 
   Widget _buildCard(
       String name, String role, int cardIndex, String image, String about) {
- 
     return Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
-          
         elevation: 7.0,
         child: Column(
-          
           children: <Widget>[
-          
             SizedBox(height: 12.0),
             Stack(children: <Widget>[
               Container(
@@ -95,7 +105,6 @@ class AboutPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(45.0),
                     color: Colors.grey[100],
                     image: DecorationImage(image: NetworkImage(image))),
-                    
               ),
             ]),
             SizedBox(height: 8.0),
@@ -115,7 +124,6 @@ class AboutPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 8.0,
                   color: Colors.grey),
-                  
             ),
             SizedBox(height: 6.0),
             Text(
@@ -125,7 +133,7 @@ class AboutPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   fontSize: 8.0,
                   color: Colors.grey),
-                  textAlign: TextAlign.center,
+              textAlign: TextAlign.center,
             ),
             SizedBox(height: 0.0),
           ],

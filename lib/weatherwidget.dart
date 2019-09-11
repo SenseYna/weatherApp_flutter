@@ -23,7 +23,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
       _weather = _weather;
     });
 
-    String text = "Xin chào Minh, Vị trí hiện tại của bạn là ${_weather.displayName.toString()}. Nhiệt độ hiện tại là ${_weather.curently.temperature.toStringAsFixed(2)} °C, chỉ số tia cực tím là: ${_weather.curently.uvIndex.toString()}. Hi vọng bạn sắp xếp được khoảng thời gian ra ngoài hợp lý.";
+    String text = "Chào buổi sáng, thông tin thời tiết hôm nay dành cho bạn như sau: Nhiệt độ hiện tại là ${_weather.curently.temperature.toStringAsFixed(2)} °C, chỉ số tia cực tím là: ${_weather.curently.uvIndex.toString()}. vị trí hiện tại của bạn là ${_weather.displayName.toString()}. Hi vọng bạn sắp xếp được khoảng thời gian ra ngoài hợp lý.";
     _speaker.speak(text);
   }
   initState() {

@@ -8,10 +8,10 @@ class ChartPage extends StatefulWidget {
 
   ChartPage({Key key, this.child}) : super(key: key);
 
-  _TestState createState() => _TestState();
+  _ChartPageState createState() => _ChartPageState();
 }
 
-class _TestState extends State<ChartPage> {
+class _ChartPageState extends State<ChartPage> {
   List<charts.Series<Sales, int>> _seriesLineData;
   MyLocation _myLocation = new MyLocation();
   Weather _weather = new Weather();
@@ -22,7 +22,7 @@ class _TestState extends State<ChartPage> {
   
     List<Sales> datatemperature = new List();
     int j=0;
-    for (int i = 0; i < 48; i+=2) {
+    for (int i = 0; i < 24; i+=1) {
       datatemperature.add(Sales(j++, _weather.infos[i].temperature));
       
     }

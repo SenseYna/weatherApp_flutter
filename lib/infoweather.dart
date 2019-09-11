@@ -31,11 +31,11 @@ class Weather {
     curently.uvIndex = json['currently']['uvIndex'];
     
     List data = json['hourly']['data'];
-    for(int i = 0; i < 48; i++){
+    for(int i = 0; i < 24; i++){
     Info temp = Info();
       temp.summary = data[i]['summary'];
-      temp.temperature = (data[i]['temperature']);
-      //temp.temperature = (data[i]['temperature'] - 32) * 5 / 9;
+     // temp.temperature = (data[i]['temperature']);
+      temp.temperature = (data[i]['temperature'] - 32) * 5 / 9;
       temp.uvIndex = data[i]['uvIndex'];
       infos.add(temp);
     }
