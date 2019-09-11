@@ -19,16 +19,15 @@ class _WeatherWidgetState extends State<WeatherWidget> {
       _weather = weatherInstance;
     } else {
       MyLocation _myLocation = new MyLocation();
-    await _myLocation.getPos();
-    await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
+      await _myLocation.getPos();
+      await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
     }
     weatherInstance = _weather;
     setState(() {
       _weather = _weather;
     });
-    String text =
-        "Xin chào bạn, Vị trí hiện tại của bạn là ${_weather.displayName.toString()}. Nhiệt độ hiện tại là ${_weather.curently.temperature.toStringAsFixed(2)} °C, chỉ số tia cực tím là: ${_weather.curently.uvIndex.toString()}. Hi vọng bạn sắp xếp được khoảng thời gian ra ngoài hợp lý.";
-    _speaker.speak(text);
+    String text = "Xin chào bạn, bây giờ là ${DateTime.now().hour} giờ ${DateTime.now().minute} phút. Nhiệt độ ngoài trời hiện tại là: ${_weather.curently.temperature.toString()} °C. Chỉ số tia cực tím là: ${_weather.curently.uvIndex.toString()}. Dự báo thời tiền trong một giờ tới là: ${_weather.nextTime.summary.toString()}. Chúc bạn có một ngày tốt lành.";
+        _speaker.speak(text);
   }
 
   initState() {
@@ -66,18 +65,24 @@ class _WeatherWidgetState extends State<WeatherWidget> {
               style: TextStyle(color: Colors.white, fontSize: 16),
               textAlign: TextAlign.left),
           Text(""),
-          // Text("Dự đoán 1 giờ sau:",
-          //     style: TextStyle(
-          //         color: Colors.white,
-          //         fontSize: 16,
-          //         fontWeight: FontWeight.bold),
-          //     textAlign: TextAlign.left),
-          // Text("Nhiệt độ: " + _weather.infos[].toStringAsFixed(2) + "°C",
-          //     style: TextStyle(color: Colors.white, fontSize: 16),
-          //     textAlign: TextAlign.left),
-          // Text("Tia uv: " + _weather.nextuvIndex.toString(),
-          //     style: TextStyle(color: Colors.white, fontSize: 16),
-          //     textAlign: TextAlign.left),
+          Text("Dự đoán 1 giờ sau:",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+              textAlign: TextAlign.left),
+          Text(
+              "Nhiệt độ: " +
+                  _weather.nextTime.temperature.toStringAsFixed(2) +
+                  "°C",
+              style: TextStyle(color: Colors.white, fontSize: 16),
+              textAlign: TextAlign.left),
+          Text("Chỉ số tia cực tím: " + _weather.nextTime.uvIndex.toString(),
+              style: TextStyle(color: Colors.white, fontSize: 16),
+              textAlign: TextAlign.left),
+          Text("Dự báo: " + _weather.nextTime.summary.toString(),
+              style: TextStyle(color: Colors.white, fontSize: 16),
+              textAlign: TextAlign.left),
         ],
       );
     }

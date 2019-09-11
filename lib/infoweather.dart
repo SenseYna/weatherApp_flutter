@@ -14,7 +14,7 @@ initWeather() async {
 
 class Info {
   String summary;
-  double temperature;
+  num temperature;
   num uvIndex;
 }
 
@@ -62,16 +62,18 @@ class Weather {
   Address displayName;
   String daySummary;
   Info curently;
-  List<Info> infos;
+  Info nextTime;
+  List<double> temperatures;
 
   Weather() {
     displayName = new Address();
     curently = new Info();
-    this.infos = new List();
+    nextTime = new Info();
+    this.temperatures = new List();
   }
 
-  isEmpty(){
-    return (infos.isEmpty);
+  isEmpty() {
+    return (temperatures.isEmpty);
   }
 
   _mapData(Map json) {
@@ -81,13 +83,15 @@ class Weather {
     curently.temperature = json['currently']['temperature'];
     curently.uvIndex = json['currently']['uvIndex'];
 
+    num nextHour = DateTime.now().hour - 2 + 1;
     List data = json['hourly']['data'];
-    for (int i = 0; i < 48; i++) {
-      Info temp = Info();
-      temp.summary = data[i]['summary'];
-      temp.temperature = data[i]['temperature'];
-      temp.uvIndex = data[i]['uvIndex'];
-      infos.add(temp);
+
+    nextTime.summary = data[nextHour]['summary'];
+    nextTime.temperature = (data[nextHour]['temperature']);
+    nextTime.uvIndex = data[nextHour]['uvIndex'];
+
+    for (int i = 0; i < 24; i++) {
+      temperatures.add(data[i]['temperature']);
     }
   }
 

@@ -25,9 +25,8 @@ class _ChartPageState extends State<ChartPage> {
     }
     weatherInstance = _weather;
     List<Sales> datatemperature = new List();
-    int j = 0;
-    for (int i = 0; i < 48; i += 2) {
-      datatemperature.add(Sales(j++, _weather.infos[i].temperature));
+    for (int i = 0; i < 24; i++) {
+      datatemperature.add(Sales(i, _weather.temperatures[i]));
     }
 
     _seriesLineData = List<charts.Series<Sales, int>>();
@@ -46,7 +45,6 @@ class _ChartPageState extends State<ChartPage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _seriesLineData = List<charts.Series<Sales, int>>();
     _generateData();
