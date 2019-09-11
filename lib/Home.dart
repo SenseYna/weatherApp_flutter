@@ -24,13 +24,13 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                 Container(
-                  padding: EdgeInsets.fromLTRB(30, 40, 0, 0),
+                  padding: EdgeInsets.fromLTRB(0, 40, 0, 0),
                   child: Container(
-                      padding: EdgeInsets.fromLTRB(20, 30, 0, 30),
-                      height: 250,
+                      padding: EdgeInsets.fromLTRB(5, 30, 5, 30),
+                      height: 500,
                       width: 300,
                       decoration: new BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black.withOpacity(0.3),
                         borderRadius: new BorderRadius.only(
                             topLeft: const Radius.circular(40.0),
                             topRight: const Radius.circular(40.0),
