@@ -1,8 +1,6 @@
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 
-// import 'fetchdata.dart';
-// import 'getdata.dart';
 import 'weatherwidget.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,7 +12,7 @@ class HomePage extends StatelessWidget {
         children: [
           Positioned.fill(
               child: FlareActor("assets/Penguin.flr",
-                  alignment: Alignment.center,
+                  alignment: Alignment.bottomCenter,
                   isPaused: _isPaused,
                   fit: BoxFit.cover,
                   animation: "walk",

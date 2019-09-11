@@ -35,31 +35,31 @@ class AboutPage extends StatelessWidget {
                                 'Đinh Xuân Anh',
                                 'Trưởng nhóm',
                                 1,
-                                'https://i.imgur.com/3O1WBaF.png',
+                                'assets/images/xuananh.png',
                                 ' Trường Đh Khoa học xã hội và Nhân văn'),
                             _buildCard(
                                 'Nguyễn Thị Hồng Hạnh',
                                 'Nghiên cứu địa lý',
                                 2,
-                                'https://i.imgur.com/cpeLKt6.png',
+                                'assets/images/honghanh.png',
                                 'Trường Đh Khoa học xã hội và Nhân văn'),
                             _buildCard(
                                 'Hồ Trần Thiện Đạt',
                                 'Dev App',
                                 3,
-                                'https://i.imgur.com/bucPOYQ.jpg',
+                                'assets/images/dat.jpg',
                                 'Trường Đh Công nghệ thông tin'),
                             _buildCard(
                                 'Đào Hữu Duy Quân',
                                 'Dev Web',
                                 4,
-                                'https://i.imgur.com/GwMjOBI.png',
+                                'assets/images/quan.png',
                                 ' Trường Đh Công nghệ thông tin'),
                             _buildCard(
                                 'Nguyễn Phương Tính',
                                 'Designer',
                                 5,
-                                'https://i.imgur.com/UJnLLgy.png',
+                                'assets/images/tinh.png',
                                 ' Trường Đh Công nghệ thông tin'),
                           ],
                         ),
@@ -94,8 +94,9 @@ class AboutPage extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(45.0),
                     color: Colors.grey[100],
-                    image: DecorationImage(image: NetworkImage(image))),
-                    
+                    // image: DecorationImage(image: NetworkImage(image))),
+                    image: DecorationImage(image: AssetImage(image))
+                )
               ),
             ]),
             SizedBox(height: 8.0),
