@@ -38,22 +38,11 @@ class Address {
 
   @override
   String toString() {
-    String address = "";
-    if (busStop != null) {
-      address += "$busStop,";
-    }
-    if (road != null) {
-      address += " đường $road,";
-    }
-    if (suburb != null) {
-      address += " $suburb,";
-    }
+    String address = "";  
     if (town != null) {
-      address += " $town,";
+      address += "$town";
     }
-    if (state != null) {
-      address += " $state.";
-    }
+    
     return address;
   }
 }

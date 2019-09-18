@@ -127,31 +127,31 @@ class AboutPage extends StatelessWidget {
                                         'Đinh Xuân Anh',
                                         'Chủ nhiệm đề tài',
                                         1,
-                                        'https://i.imgur.com/3O1WBaF.png',
+                                        'assets/images/xuananh.png',
                                         ' Trường Đh Khoa học xã hội và Nhân văn'),
                                     _buildCard(
                                         'Nguyễn Thị Hồng Hạnh',
                                         'Phó chủ nhiệm',
                                         2,
-                                        'https://i.imgur.com/cpeLKt6.png',
+                                        'assets/images/honghanh.png',
                                         'Trường Đh Khoa học xã hội và Nhân văn'),
                                     _buildCard(
                                         'Hồ Trần Thiện Đạt',
                                         'Lập trình viên Android',
                                         3,
-                                        'https://i.imgur.com/bucPOYQ.jpg',
+                                        'assets/images/dat.jpg',
                                         'Trường Đh Công nghệ thông tin'),
                                     _buildCard(
                                         'Đào Hữu Duy Quân',
                                         'Lập trình viên Web',
                                         4,
-                                        'https://i.imgur.com/GwMjOBI.png',
+                                        'assets/images/quan.png',
                                         ' Trường Đh Công nghệ thông tin'),
                                     _buildCard(
                                         'Nguyễn Phương Tính',
                                         'Thiết kế UI/UX',
                                         5,
-                                        'https://i.imgur.com/UJnLLgy.png',
+                                        'assets/images/tinh.png',
                                         ' Trường Đh Công nghệ thông tin'),
                                   ],
                                 ),
@@ -301,13 +301,13 @@ class AboutPage extends StatelessWidget {
             SizedBox(height: 12.0),
             Stack(children: <Widget>[
               Container(
-                height: 90.0,
-                width: 90.0,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(45.0),
-                    color: Colors.grey[100],
-                    image: DecorationImage(image: NetworkImage(image))),
-              ),
+                  height: 90.0,
+                  width: 90.0,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(45.0),
+                      color: Colors.grey[100],
+                      // image: DecorationImage(image: NetworkImage(image))),
+                      image: DecorationImage(image: AssetImage(image)))),
             ]),
             SizedBox(height: 8.0),
             Text(
