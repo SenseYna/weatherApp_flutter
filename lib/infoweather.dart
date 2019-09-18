@@ -91,7 +91,7 @@ class Weather {
     nextTime.uvIndex = data[nextHour]['uvIndex'];
 
     for (int i = 0; i < 24; i++) {
-      temperatures.add(data[i]['temperature']);
+      temperatures.add(data[i]['temperature']*1.0);
     }
   }
 

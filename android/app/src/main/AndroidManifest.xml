@@ -8,13 +8,13 @@
          FlutterApplication and put your custom class here. -->
    <uses-permission android:name="android.permission.INTERNET"/>
 	 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-   <application
+   <application  
         android:name="io.flutter.app.FlutterApplication"
         android:label="weather_app_flutter"
         android:icon="@mipmap/ic_launcher">
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyA25lvbMi3Vh5awMNbqytppNefzwhNQU-o"/>
-        <activity
+               android:value="AIzaSyDxtPzd-0X7lce6_C76YY_gaHsdW2C2iq8"/>
+       <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"

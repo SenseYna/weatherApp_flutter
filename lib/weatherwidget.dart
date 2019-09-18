@@ -19,6 +19,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
       _weather = weatherInstance;
     } else {
       MyLocation _myLocation = new MyLocation();
+      locationInstance = _myLocation;
       await _myLocation.getPos();
       await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
     }
@@ -26,7 +27,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
     setState(() {
       _weather = _weather;
     });
-    String text = "Xin chào bạn, bây giờ là ${DateTime.now().hour} giờ ${DateTime.now().minute} phút. Nhiệt độ ngoài trời hiện tại là: ${_weather.curently.temperature.toString()} °C. Chỉ số tia cực tím là: ${_weather.curently.uvIndex.toString()}. Dự báo thời tiền trong một giờ tới là: ${_weather.nextTime.summary.toString()}. Chúc bạn có một ngày tốt lành.";
+    String text = "Xin chào bạn, bây giờ là ${DateTime.now().hour} giờ ${DateTime.now().minute} phút. Nhiệt độ ngoài trời hiện tại là: ${_weather.curently.temperature.toString()} °C. Chỉ số tia cực tím là: ${_weather.curently.uvIndex.toString()}. Dự báo thời tiết trong một giờ tới là: ${_weather.nextTime.summary.toString()}. Chúc bạn có một ngày tốt lành.";
         _speaker.speak(text);
   }
 
@@ -43,6 +44,7 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   @override
   build(context) {
     if (_weather == null) {
+
       return Text("Lỗi!!!");
     } else if (_weather.displayName != null &&
         _weather.curently.temperature != null &&
@@ -75,9 +77,6 @@ class _WeatherWidgetState extends State<WeatherWidget> {
               "Nhiệt độ: " +
                   _weather.nextTime.temperature.toStringAsFixed(2) +
                   "°C",
-              style: TextStyle(color: Colors.white, fontSize: 16),
-              textAlign: TextAlign.left),
-          Text("Chỉ số tia cực tím: " + _weather.nextTime.uvIndex.toString(),
               style: TextStyle(color: Colors.white, fontSize: 16),
               textAlign: TextAlign.left),
           Text("Dự báo: " + _weather.nextTime.summary.toString(),

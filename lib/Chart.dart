@@ -15,17 +15,19 @@ class _ChartPageState extends State<ChartPage> {
   List<charts.Series<Sales, int>> _seriesLineData;
   Weather _weather;
 
+
   _generateData() async {
     if (!weatherInstance.isEmpty()) {
       _weather = weatherInstance;
     } else {
       MyLocation _myLocation = new MyLocation();
-    await _myLocation.getPos();
-    await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
+      await _myLocation.getPos();
+      await _weather.fetchData(_myLocation.latitude, _myLocation.longitude);
     }
     weatherInstance = _weather;
     List<Sales> datatemperature = new List();
-    for (int i = 0; i < 24; i++) {
+
+    for (int i = 1; i < 24; i++) {
       datatemperature.add(Sales(i, _weather.temperatures[i]));
     }
 
@@ -62,7 +64,7 @@ class _ChartPageState extends State<ChartPage> {
                 children: <Widget>[
                   Text(''),
                   Text(
-                    'Biểu đồ nhiệt độ trong ngày',
+                    'Biểu đồ nhiệt độ trong 24 giờ tới',
                     style:
                         TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
