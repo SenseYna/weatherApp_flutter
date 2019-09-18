@@ -10,25 +10,46 @@ import './Map.dart';
 import './About.dart';
 import './Chart.dart';
 
+import 'infoweather.dart';
+
 void main() {
   runApp(MyApp1());
-  runApp(MyApp());
+  // runApp(MyApp());
 }
 
 class MyApp1 extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _MyApp1State();
   }
 }
 
 class _MyApp1State extends State<MyApp1> {
+  bool _isLoaded = false;
+
+  initResource() async {
+    await initWeather();
+    _isLoaded = true;
+    setState(() {
+      
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initResource();
+  }
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    if(_isLoaded == true) {
+      return new MaterialApp(
+      title: 'Weather App',
+      theme: new ThemeData(primarySwatch: Colors.blue),
+      home: new MyHomePage(title: 'Weather App'),
+    );
+    }
     return MaterialApp(
-      
      home: Scaffold(
       body: Center(
         child: Column(
@@ -55,7 +76,7 @@ class _MyApp1State extends State<MyApp1> {
 
 
 
-void main() => runApp(new MyApp());
+// void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
