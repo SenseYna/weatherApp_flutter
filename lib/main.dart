@@ -11,51 +11,51 @@ import './About.dart';
 import './Chart.dart';
 
 void main() {
-  runApp(MyApp1());
+ // runApp(MyApp1());
   runApp(MyApp());
 }
 
-class MyApp1 extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return _MyApp1State();
-  }
-}
+// class MyApp1 extends StatefulWidget {
+//   @override
+//   State<StatefulWidget> createState() {
+//     // TODO: implement createState
+//     return _MyApp1State();
+//   }
+// }
 
-class _MyApp1State extends State<MyApp1> {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
+// class _MyApp1State extends State<MyApp1> {
+//   @override
+//   Widget build(BuildContext context) {
+//     // TODO: implement build
+//     return MaterialApp(
       
-     home: Scaffold(
-      body: Center(
-        child: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Container(
-                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-                height: 590.0,
-                width: 600.0,
-                decoration: BoxDecoration(
+//      home: Scaffold(
+//       body: Center(
+//         child: Column(
+//           //mainAxisAlignment: MainAxisAlignment.center,
+//           children: <Widget>[
+//             Container(
+//                 margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+//                 height: 590.0,
+//                 width: 600.0,
+//                 decoration: BoxDecoration(
 
-                    // image: DecorationImage(image: NetworkImage(image))),
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/cloud1.jpg')))),
-          ],
-        ),
-      ),
-    ),
+//                     // image: DecorationImage(image: NetworkImage(image))),
+//                     image: DecorationImage(
+//                         image: AssetImage('assets/images/cloud1.jpg')))),
+//           ],
+//         ),
+//       ),
+//     ),
         
 
-    );
-  }
-}
+//     );
+//   }
+// }
 
 
 
-void main() => runApp(new MyApp());
+
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.

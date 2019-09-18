@@ -118,19 +118,19 @@ class _WeatherWidgetState extends State<WeatherWidget> {
                   children: <Widget>[
                     Container(
                       width: 70.0,
-                      height: 30.0,
+                      height: 40.0,
                       child: Column(
                         children: <Widget>[
                           Icon(
-                            setIcon(timeNow),
-                            color: Colors.white,
-                            size: 30.0,
+                            setIconKind(timeNow),
+                            color: Colors.yellow[300],
+                            size: 40.0,
                           ),
                         ],
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 40.0),
+                      margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 48.0),
                       width: 100.0,
                       height: 110.0,
                       child: Row(
@@ -152,17 +152,8 @@ class _WeatherWidgetState extends State<WeatherWidget> {
             ),
           ),
           SizedBox(
-            height: 200.0,
+            height: 50.0,
           ),
-          Text(
-              "Nhiệt độ: " +
-                  _weather.curently.temperature.toStringAsFixed(2) +
-                  "°C",
-              style: TextStyle(color: Colors.white, fontSize: 16),
-              textAlign: TextAlign.left),
-          Text("Chỉ số tia cực tím: " + _weather.curently.uvIndex.toString(),
-              style: TextStyle(color: Colors.white, fontSize: 16),
-              textAlign: TextAlign.left),
           Text("Dự báo trong ngày: " + _weather.daySummary.toString(),
               style: TextStyle(color: Colors.white, fontSize: 16),
               textAlign: TextAlign.left),
@@ -170,14 +161,14 @@ class _WeatherWidgetState extends State<WeatherWidget> {
           Row(
             children: <Widget>[
               Container(
-                height: 80,
+                height: 00,
               ),
             ],
           ),
           Row(
             children: <Widget>[
               SizedBox(
-                width: 80.0,
+                width: 00.0,
               ),
               Text("Dự đoán 1 giờ sau:",
                   style: TextStyle(
@@ -220,10 +211,11 @@ class _WeatherWidgetState extends State<WeatherWidget> {
   }
 }
 
-IconData setIcon(int timeNow) {
+IconData setIconKind(int timeNow) {
   if (timeNow > 6 && timeNow < 18) {
     return FontAwesomeIcons.cloudSun;
   } else {
     return FontAwesomeIcons.cloudMoon;
   }
 }
+
