@@ -3,8 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class AboutPage extends StatelessWidget {
   @override
-  String titleMembers = '     MEMBERS';
-  String titleIntroduce = '     INTRODUCE';
+  String titleMembers = '     THÀNH VIÊN';
+  String titleIntroduce = '     GIỚI THIỆU ĐỀ TÀI';
   Widget build(BuildContext context) {
     return new ListView(
       shrinkWrap: true,
@@ -13,12 +13,6 @@ class AboutPage extends StatelessWidget {
           color: Colors.white,
           height: 5000.0,
           width: 500.0,
-          //  decoration: new BoxDecoration(
-          //           color: Colors.white,
-          //           borderRadius: BorderRadius.circular(20.0),
-          //           boxShadow: [
-          //             BoxShadow(blurRadius: 2.0, color: Colors.grey)
-          //           ]),
           child: Column(
             children: <Widget>[
               Container(
@@ -52,15 +46,9 @@ class AboutPage extends StatelessWidget {
                               width: 350.0,
                               decoration: new BoxDecoration(
                                 color: Colors.blue[300],
-                                //borderRadius: BorderRadius.circular(20.0),
-                                // boxShadow: [
-                                //   BoxShadow(
-                                //       blurRadius: 2.0,
-                                //       color: Colors.grey[100])
-                                // ]
                               ),
                               child: Text(
-                                'Ứng dụng "tên app" (weather/nhietdo....) là sản phẩm của đề tài nghiên cứu khoa học “Ứng dụng công cụ Smartphone trong giám sát và dự báo sự thay đổi nhiệt độ tại Thành phố Hồ Chí Minh.”\n\n'
+                                'Ứng dụng "Weather Eureka" là sản phẩm của đề tài nghiên cứu khoa học “Ứng dụng công cụ Smartphone trong giám sát và dự báo sự thay đổi nhiệt độ tại Thành phố Hồ Chí Minh.”\n\n'
                                 'Ứng dụng được tạo ra nhằm giám sát sự thay đổi nhiệt độ và chỉ số tia UV, bên cạnh đó đưa ra dự báo về nhiệt độ cũng như đánh giá mức độ rủi ro từ chỉ số tia UV tại Thành phố Hồ Chí Minh và các vùng lân cận bằng những cách thức đơn giản nhất để người dùng dễ dàng tiếp cận.\n\n'
                                 'Từ ứng dụng này, chúng tôi hy vọng mang đến cho người dùng những trải nghiệm mới về ứng dụng giám sát và dự báo nhiệt độ, từ đó người dùng có thể đưa ra những biện pháp bảo vệ trước những biến đổi của môi trường hiện nay.\n'
                                 '\n',
@@ -128,31 +116,31 @@ class AboutPage extends StatelessWidget {
                                         'Chủ nhiệm đề tài',
                                         1,
                                         'assets/images/xuananh.png',
-                                        ' Trường Đh Khoa học xã hội và Nhân văn'),
+                                        ' Trường ĐH Khoa học xã hội và Nhân văn'),
                                     _buildCard(
                                         'Nguyễn Thị Hồng Hạnh',
                                         'Phó chủ nhiệm',
                                         2,
                                         'assets/images/honghanh.png',
-                                        'Trường Đh Khoa học xã hội và Nhân văn'),
+                                        'Trường ĐH Khoa học xã hội và Nhân văn'),
                                     _buildCard(
                                         'Hồ Trần Thiện Đạt',
                                         'Lập trình viên Android',
                                         3,
                                         'assets/images/dat.jpg',
-                                        'Trường Đh Công nghệ thông tin'),
+                                        'Trường ĐH Công nghệ thông tin'),
                                     _buildCard(
                                         'Đào Hữu Duy Quân',
                                         'Lập trình viên Web',
                                         4,
                                         'assets/images/quan.png',
-                                        ' Trường Đh Công nghệ thông tin'),
+                                        ' Trường ĐH Công nghệ thông tin'),
                                     _buildCard(
                                         'Nguyễn Phương Tính',
                                         'Thiết kế UI/UX',
                                         5,
                                         'assets/images/tinh.png',
-                                        ' Trường Đh Công nghệ thông tin'),
+                                        ' Trường ĐH Công nghệ thông tin'),
                                   ],
                                 ),
                               ),
@@ -166,7 +154,7 @@ class AboutPage extends StatelessWidget {
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(1.0, 20.0, 1.0, 0.0),
-                height: 230.0,
+                height: 240.0,
                 width: 500.0,
                 decoration: new BoxDecoration(
                     color: Colors.grey[100],
@@ -178,7 +166,7 @@ class AboutPage extends StatelessWidget {
                   children: <Widget>[
                     Text(' '),
                     Text(
-                      'Contact\n',
+                      'Liên hệ\n',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 18.0,
@@ -194,7 +182,7 @@ class AboutPage extends StatelessWidget {
                         Text(' '),
                         const Expanded(
                           child: Text(
-                            'Trường Đại học Công nghệ thông tin, khu phố 6, Thủ Đức, TP. Hồ Chí Minh',
+                            'Trường ĐH Công nghệ thông tin, khu phố 6, Thủ Đức, TP. Hồ Chí Minh',
                             style: TextStyle(
                               fontSize: 14.0,
                             ),
@@ -264,7 +252,9 @@ class AboutPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 10.0,),
+              SizedBox(
+                height: 10.0,
+              ),
               Container(
                 // margin: EdgeInsets.fromLTRB(1.0, 20.0, 1.0, 0.0),
                 height: 50.0,

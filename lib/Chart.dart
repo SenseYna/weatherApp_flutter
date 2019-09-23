@@ -82,9 +82,9 @@ class _ChartPageState extends State<ChartPage> {
                               titleOutsideJustification:
                                   charts.OutsideJustification.middleDrawArea),
                           new charts.ChartTitle('°C',
-                              behaviorPosition: charts.BehaviorPosition.start,
+                              behaviorPosition: charts.BehaviorPosition.top,
                               titleOutsideJustification:
-                                  charts.OutsideJustification.middleDrawArea),
+                                  charts.OutsideJustification.start),
                           new charts.ChartTitle(
                             '',
                             behaviorPosition: charts.BehaviorPosition.end,

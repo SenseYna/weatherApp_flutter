@@ -10,10 +10,10 @@
 	 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application  
         android:name="io.flutter.app.FlutterApplication"
-        android:label="weather_app_flutter"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Now Temperature"
+        android:icon="@mipmap/eureka_icon">
         <meta-data android:name="com.google.android.geo.API_KEY"
-               android:value="AIzaSyDxtPzd-0X7lce6_C76YY_gaHsdW2C2iq8"/>
+               android:value="AIzaSyAkq8qcTCZzYz2KIiiLjlGHkiaFII2Ezxg"/>
        <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

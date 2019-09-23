@@ -1,15 +1,70 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import 'package:flutter/material.dart';
 import 'infolocation.dart';
+import 'weatherwidget.dart';
 
 MyLocation locationInstance = MyLocation();
 Weather weatherInstance = Weather();
+Warning warningUV = Warning();
+MyFlare myflare = new MyFlare();
 
 initWeather() async {
   await locationInstance.getPos();
   await weatherInstance.fetchData(
       locationInstance.latitude, locationInstance.longitude);
+  //myflare = new MyFlare();
+}
+
+class Warning {
+  String textTitle;
+  String textContent;
+  Color color;
+  BoxDecoration boxDecoration;
+
+  Warning() {
+    if (weatherInstance.curently.uvIndex > -1 &&
+        weatherInstance.curently.uvIndex < 3) {
+      textTitle = "\nCẢNH BÁO NGUY HIỂM THẤP";
+      textContent = "(Bạn vẫn có thể an toàn khi ở ngoài trời.)";
+      boxDecoration = BoxDecoration(
+          border: Border.all(width: 2.0, color: Colors.white.withOpacity(0.5)));
+      color = Colors.green;
+    } else if (weatherInstance.curently.uvIndex < 6) {
+      textTitle = "\nCẢNH BÁO RỦI RO VỪA PHẢI";
+      textContent =
+          "(Bạn nên sử dụng kem chống nắng, kính râm, che chắn cơ thể.)";
+      boxDecoration = BoxDecoration(
+          border: Border.all(width: 2.0, color: Colors.white.withOpacity(0.5)));
+      color = Colors.yellow;
+    } else if (weatherInstance.curently.uvIndex < 9) {
+      textTitle = "CẢNH BÁO NGUY CƠ CAO";
+      textContent =
+          "(Bạn nên sử dụng kem chống nắng (SPF>15+), kính râm, che chắn cơ thể và tìm kiếm bóng râm. Giảm thiểu thời gian tiếp xúc ánh nắng.)";
+      boxDecoration = BoxDecoration(boxShadow: [
+        BoxShadow(blurRadius: 1.0, color: Colors.black.withOpacity(0.4))
+      ]);
+
+      color = Colors.orange;
+    } else if (weatherInstance.curently.uvIndex < 11) {
+      textTitle = "CẢNH BÁO NGUY CƠ CAO";
+      textContent =
+          "(Bạn nên sử dụng kem chống nắng (SPF>30), kính râm, che chắn cơ thể, chăm sóc da để tránh cháy nắng. Không nên đứng dưới nắng quá lâu lúc này.)";
+      boxDecoration = BoxDecoration(boxShadow: [
+        BoxShadow(blurRadius: 1.0, color: Colors.black.withOpacity(0.4))
+      ]);
+      color = Colors.red;
+    } else {
+      textTitle = "NGUY CƠ RẤT CAO";
+
+      textContent =
+          "(Bạn nên sử dụng kem chống nắng (SPF>30+), kính râm, che chắn cơ thể. Tránh tiếp xúc trực tiếp ánh nắng lúc này.)";
+      boxDecoration = BoxDecoration(
+          color: Colors.red.withOpacity(0.8),
+          boxShadow: [BoxShadow(blurRadius: 1.0, color: Colors.grey[400])]);
+      color = Colors.purple;
+    }
+  }
 }
 
 class Info {
@@ -38,11 +93,11 @@ class Address {
 
   @override
   String toString() {
-    String address = "";  
+    String address = "";
     if (town != null) {
       address += "$town";
     }
-    
+
     return address;
   }
 }
@@ -80,15 +135,18 @@ class Weather {
     nextTime.uvIndex = data[nextHour]['uvIndex'];
 
     for (int i = 0; i < 24; i++) {
-      temperatures.add(data[i]['temperature']*1.0);
+      temperatures.add(data[i]['temperature'] * 1.0);
     }
   }
 
   fetchData(String lat, String lon) async {
     //Lấy dữ liệu thời tiết
     var resLinkToData = await http.get(getLinkToData(lat, lon));
+
     var data = json.decode(resLinkToData.body);
+
     _mapData(data);
+
     //Lấy dữ liệu tên hiển thị
     await displayName.fetchData(lat, lon);
   }

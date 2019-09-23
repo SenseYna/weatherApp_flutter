@@ -10,52 +10,81 @@ import './Map.dart';
 import './About.dart';
 import './Chart.dart';
 
+import 'infoweather.dart';
+
 void main() {
- // runApp(MyApp1());
-  runApp(MyApp());
+  runApp(MyApp1());
+  // runApp(MyApp());
 }
 
-// class MyApp1 extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() {
-//     // TODO: implement createState
-//     return _MyApp1State();
-//   }
-// }
+class MyApp1 extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _MyApp1State();
+  }
+}
 
-// class _MyApp1State extends State<MyApp1> {
-//   @override
-//   Widget build(BuildContext context) {
-//     // TODO: implement build
-//     return MaterialApp(
-      
-//      home: Scaffold(
-//       body: Center(
-//         child: Column(
-//           //mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             Container(
-//                 margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-//                 height: 590.0,
-//                 width: 600.0,
-//                 decoration: BoxDecoration(
+class _MyApp1State extends State<MyApp1> {
+  bool _isLoaded = false;
 
-//                     // image: DecorationImage(image: NetworkImage(image))),
-//                     image: DecorationImage(
-//                         image: AssetImage('assets/images/cloud1.jpg')))),
-//           ],
-//         ),
-//       ),
-//     ),
-        
+  initResource() async {
+    await initWeather();
+    _isLoaded = true;
 
-//     );
-//   }
-// }
+    setState(() {});
+  }
 
+  @override
+  void initState() {
+    super.initState();
+    initResource();
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    if (_isLoaded == true) {
+      return new MaterialApp(
+        title: 'Now Temperature',
+        theme: new ThemeData(primarySwatch: Colors.blue),
+        home: new MyHomePage(title: 'Now Temperature'),
+      );
+    }
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                height: 590.0,
+                width: 600.0,
+                decoration: BoxDecoration(
 
+                    // image: DecorationImage(image: NetworkImage(image))),
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/cloud1.jpg'),
+                        fit: BoxFit.fitHeight)),
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                  height: 700.0,
+                  width: 600.0,
+                  decoration: BoxDecoration(
 
+                      // image: DecorationImage(image: NetworkImage(image))),
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/logo-eureka.png'))),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// void main() => runApp(new MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -119,7 +148,18 @@ class _MyHomePageState extends State<MyHomePage> with FlareController {
     return new Scaffold(
       backgroundColor: Colors.grey,
       appBar: new AppBar(
-        title: new Text(widget.title),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/logo-eureka.png',
+              fit: BoxFit.contain,
+              height: 32,
+            ),
+            Container(
+                padding: const EdgeInsets.all(8.0), child: Text(widget.title))
+          ],
+        ),
         backgroundColor: Colors.blue,
       ),
       body: _pageOptions[_selectedPage],
@@ -134,19 +174,19 @@ class _MyHomePageState extends State<MyHomePage> with FlareController {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            title: Text('Home'),
+            title: Text('Trang chủ'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),
-            title: Text('Map'),
+            title: Text('Bản đồ'),
           ),
           BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.chartLine),
-            title: Text('Chart'),
+            title: Text('Đồ thị'),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.info),
-            title: Text('About'),
+            title: Text('Về chúng tôi'),
           ),
         ],
       ),
