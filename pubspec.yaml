@@ -11,10 +11,10 @@ description: A new Flutter project.
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.2+3
+version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -24,6 +24,7 @@ dependencies:
   google_maps_flutter: ^0.5.21
   flutter_launcher_icons: ^0.7.3
   geolocator: ^5.1.3
+  geocoder: ^0.2.1
   http: ^0.12.0+2
   flutter_tts: ^0.5.2
   # The following adds the Cupertino Icons font to your application.
@@ -31,6 +32,19 @@ dependencies:
   cupertino_icons: ^0.1.2
   charts_flutter: ^0.8.0
   font_awesome_flutter: ^8.5.0
+  firebase_auth: ^0.15.2
+  firebase_database: ^3.1.1
+  firebase_storage: ^3.1.0
+  english_words: ^3.1.0
+  gradient_app_bar: ^0.0.1
+  cloud_firestore: ^0.13.0+1
+  image_cropper: ^1.1.2
+  image_picker: ^0.6.2+3
+  flutter_image_compress: ^0.6.3
+  provider: ^3.2.0
+  path_provider: ^1.5.1
+  cached_network_image: ^2.0.0-rc
+  uuid: ^2.0.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -39,7 +53,6 @@ flutter_icons:
   android: "eureka_icon" 
   ios: true
   image_path: "assets/images/logo-eureka.png"
-
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
@@ -65,8 +78,10 @@ flutter:
    - assets/images/voice_on.png
    - assets/images/logo-eureka.png
    - assets/images/logo-darksky.png
-   - assets/images/eureka.png
-   
+   - assets/flutter-icon.png
+   - assets/avatar.jpg
+   - assets/picture.jpg
+   - assets/user_placeholder.jpg
    
   
   #  - images/a_dot_ham.jpeg
