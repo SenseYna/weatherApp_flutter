@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'weatherwidget.dart';
 import 'infoweather.dart';
 
+
 class HomePage extends StatefulWidget {
+  static final String id='Homescreen';
   @override
   State<StatefulWidget> createState() {
     return _HomePageState();
@@ -22,7 +24,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
               Container(
-                padding: EdgeInsets.fromLTRB(0, 30, 0, 0),
+                padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
                 child: Container(
                     padding: EdgeInsets.fromLTRB(5, 10, 5, 10),
                     height: 500,

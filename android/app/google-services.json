@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "707935789013",
+    "firebase_url": "https://weather-eureka.firebaseio.com",
+    "project_id": "weather-eureka",
+    "storage_bucket": "weather-eureka.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:707935789013:android:56d508fa0483213b40e75c",
+        "android_client_info": {
+          "package_name": "com.example.weather_app_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "707935789013-5vq9n4bg38v4pp9re6chtkpom67qe1se.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQMftr2wuI5Ajfz4dNRzptBoDwvz6yPp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "707935789013-5vq9n4bg38v4pp9re6chtkpom67qe1se.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
