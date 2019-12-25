@@ -4,7 +4,7 @@
 # Ứng dụng theo dõi nhiệt dồ và UV - Nhóm Phone Gang
 
 - Đồ án môn học: Lập trình trên thiết bị di động
-- Lớp: SE346.K12.PMCL Học kì 2018-2019
+- Lớp: SE346.K12.PMCL Học kì 2019-2020
 - Giáo viên: Mr. Huỳnh Tuấn Anh [Github](https://github.com/anhhna/ "Github")
 - Apk file: 
 ## Giới thiệu :
