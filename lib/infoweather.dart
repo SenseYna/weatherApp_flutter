@@ -40,7 +40,7 @@ class Warning {
     } else if (weatherInstance.curently.uvIndex < 9) {
       textTitle = "CẢNH BÁO NGUY CƠ CAO";
       textContent =
-          "(Bạn nên sử dụng kem chống nắng, kính râm, che chắn cơ thể và tìm kiếm bóng râm. Giảm thiểu thời gian tiếp xúc ánh nắng.)";
+          "(Bạn nên sử dụng kem chống nắng (SPF>15+), kính râm, che chắn cơ thể và tìm kiếm bóng râm. Giảm thiểu thời gian tiếp xúc ánh nắng.)";
       boxDecoration = BoxDecoration(boxShadow: [
         BoxShadow(blurRadius: 1.0, color: Colors.black.withOpacity(0.4))
       ]);
@@ -49,7 +49,7 @@ class Warning {
     } else if (weatherInstance.curently.uvIndex < 11) {
       textTitle = "CẢNH BÁO NGUY CƠ CAO";
       textContent =
-          "(Bạn nên sử dụng kem chống nắng, kính râm, che chắn cơ thể, chăm sóc da để tránh cháy nắng. Không nên đứng dưới nắng quá lâu lúc này.)";
+          "(Bạn nên sử dụng kem chống nắng (SPF>30), kính râm, che chắn cơ thể, chăm sóc da để tránh cháy nắng. Không nên đứng dưới nắng quá lâu lúc này.)";
       boxDecoration = BoxDecoration(boxShadow: [
         BoxShadow(blurRadius: 1.0, color: Colors.black.withOpacity(0.4))
       ]);
@@ -58,7 +58,7 @@ class Warning {
       textTitle = "NGUY CƠ RẤT CAO";
 
       textContent =
-          "(Bạn nên sử dụng kem chống nắng, kính râm, che chắn cơ thể. Tránh tiếp xúc trực tiếp ánh nắng lúc này.)";
+          "(Bạn nên sử dụng kem chống nắng (SPF>30+), kính râm, che chắn cơ thể. Tránh tiếp xúc trực tiếp ánh nắng lúc này.)";
       boxDecoration = BoxDecoration(
           color: Colors.red.withOpacity(0.8),
           boxShadow: [BoxShadow(blurRadius: 1.0, color: Colors.grey[400])]);

@@ -58,7 +58,11 @@ class _ChartPageState extends State<ChartPage> {
         Padding(
           padding: EdgeInsets.all(0.0),
           child: Container(
-            color: Colors.white,
+            decoration: BoxDecoration(
+                gradient: LinearGradient(
+                    begin: Alignment.topRight,
+                    end: Alignment.bottomLeft,
+                    colors: [Color.fromARGB(255, 132, 56, 207), Color.fromARGB(255, 157, 229, 244)])), // if current it
             child: Center(
               child: Column(
                 children: <Widget>[
@@ -66,7 +70,7 @@ class _ChartPageState extends State<ChartPage> {
                   Text(
                     'Biểu đồ nhiệt độ trong 24 giờ tới',
                     style:
-                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold,color: Colors.white),
                   ),
                   Text(''),
                   Expanded(
