@@ -6,7 +6,7 @@
 - Đồ án môn học: Lập trình trên thiết bị di động
 - Lớp: SE346.K12.PMCL Học kì 2018-2019
 - Giáo viên: Mr. Huỳnh Tuấn Anh [Github](https://github.com/anhhna/ "Github")
-- Apk file: [Download](https://drive.google.com/file/d/1_zjxCBjGTGBx0W1FX5LYCIcM7leO5Qgw/view?usp=sharing)
+- Apk file: 
 ## Giới thiệu :
 - Bạn qun tâm về thời tiết? Bạn muốn biết chỉ số tia UV khi ra đường? Ứng dụng Now Temp sẽ giúp bạn điều ấy. Ứng dụng giúp bạn theo dõi được nhiệt dộ và chỉ số UV trên điện thoại di động của mình. Now Temp giúp bạn có được thông tin nhiệt dộ UV mọi lúc mọi nơi
 - Ứng dụng còn có chế độ bản dồ cho bạn dễ dàng xem nhiệt độ và chỉ số UV ở vị trí hiện tại và nơi xa.
