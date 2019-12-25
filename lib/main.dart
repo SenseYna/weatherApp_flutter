@@ -66,14 +66,14 @@ class _MyApp1State extends State<MyApp1> {
                         image: AssetImage('assets/images/cloud1.jpg'),
                         fit: BoxFit.fitHeight)),
                 child: Container(
-                  margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                  margin: EdgeInsets.fromLTRB(5.0, 0.0, 0.0, 0.0),
                   height: 700.0,
                   width: 600.0,
                   decoration: BoxDecoration(
 
                       // image: DecorationImage(image: NetworkImage(image))),
                       image: DecorationImage(
-                          image: AssetImage('assets/images/logo-eureka.png'))),
+                          image: AssetImage('assets/images/eureka.png'))),
                 ),
               ),
             ],

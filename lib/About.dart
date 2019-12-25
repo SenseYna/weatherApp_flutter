@@ -11,7 +11,7 @@ class AboutPage extends StatelessWidget {
       children: <Widget>[
         Container(
           color: Colors.white,
-          height: 5000.0,
+          height: 1500.0,
           width: 500.0,
           child: Column(
             children: <Widget>[
@@ -48,7 +48,7 @@ class AboutPage extends StatelessWidget {
                                 color: Colors.blue[300],
                               ),
                               child: Text(
-                                'Ứng dụng "Weather Eureka" là sản phẩm của đề tài nghiên cứu khoa học “Ứng dụng công cụ Smartphone trong giám sát và dự báo sự thay đổi nhiệt độ tại Thành phố Hồ Chí Minh.”\n\n'
+                                'Ứng dụng "Now Temperature" là sản phẩm của đề tài nghiên cứu khoa học “Ứng dụng công cụ Smartphone trong giám sát và dự báo sự thay đổi nhiệt độ tại Thành phố Hồ Chí Minh.”\n\n'
                                 'Ứng dụng được tạo ra nhằm giám sát sự thay đổi nhiệt độ và chỉ số tia UV, bên cạnh đó đưa ra dự báo về nhiệt độ cũng như đánh giá mức độ rủi ro từ chỉ số tia UV tại Thành phố Hồ Chí Minh và các vùng lân cận bằng những cách thức đơn giản nhất để người dùng dễ dàng tiếp cận.\n\n'
                                 'Từ ứng dụng này, chúng tôi hy vọng mang đến cho người dùng những trải nghiệm mới về ứng dụng giám sát và dự báo nhiệt độ, từ đó người dùng có thể đưa ra những biện pháp bảo vệ trước những biến đổi của môi trường hiện nay.\n'
                                 '\n',

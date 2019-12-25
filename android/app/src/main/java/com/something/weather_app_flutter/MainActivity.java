@@ -1,4 +1,4 @@
-package com.example.weather_app_flutter;
+package com.something.weather_app_flutter;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
