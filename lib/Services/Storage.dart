@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:weather_app_flutter/Utilities/Constants.dart';
@@ -26,6 +27,7 @@ class StorageService {
   }
 
   static Future<File> compressImage(String photoId, File image) async {
+
     final tempDir = await getTemporaryDirectory();
     final path = tempDir.path;
     File compressedImageFile = await FlutterImageCompress.compressAndGetFile(

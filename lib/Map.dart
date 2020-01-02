@@ -1,12 +1,19 @@
 import 'dart:async';
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:http/http.dart';
+import 'package:weather_app_flutter/Model/Marker_Feed.dart';
+import 'package:weather_app_flutter/Model/User_Feed.dart';
+import 'package:weather_app_flutter/Model/User.dart';
+import 'package:weather_app_flutter/Services/Database.dart';
 import 'package:weather_app_flutter/Model/Marker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:weather_app_flutter/Utilities/Constants.dart';
 import 'infoweather.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:flutter_advanced_networkimage/provider.dart';
+import 'About.dart';
+
 
 class PinInformation {
   String pinPath;
@@ -29,6 +36,8 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
 
+
+
   Completer<GoogleMapController> _controller = Completer();
   final Set<Marker> _markers={
   };
@@ -42,9 +51,14 @@ class _MapPageState extends State<MapPage> {
   double pinPillPosition = -800;
   double pinPillPositionBottom=-800;
   double closeButtonPosition=-800;
+  String currentMarker;
   //Weather _weather;
   static String infoWeatherMarker;
   bool isDone=false;
+  bool isHavePost=false;
+  bool isLoadFeedDone=false;
+  MarkerPoint currentMarkerInfo;
+  List<User_Feed> _Post=[];
   LatLng _center = new LatLng(double.parse(locationInstance.latitude),
         double.parse(locationInstance.longitude));
 
@@ -60,19 +74,36 @@ class _MapPageState extends State<MapPage> {
 
   }
 
-  getDistrict() async
-  {
-    List<Placemark> placeMark = await Geolocator().placemarkFromCoordinates(10.8705295,106.8031215);
-    List<Placemark> districtMark = await Geolocator().placemarkFromCoordinates(10.8494,106.7537);
 
-    print(districtMark[0].subAdministrativeArea==placeMark[0].subAdministrativeArea);
+  displayFeed(String markerId) async{
+
+    List<User_Feed>_post = await DatabaseService.getMarkerFeed(markerId);
+    MarkerPoint marker = await DatabaseService.getMarkerInfo(markerId);
+    setState(() {
+      _Post=_post;
+      currentMarkerInfo = marker;
+      if(_Post.length>0)
+        {
+          isHavePost=true;
+
+        }
+      else
+        isHavePost=false;
+      isLoadFeedDone=true;
+    });
+
+
+
+
   }
+
 
   // LatLng _lastMapPosition;
 
   MapType _currentMapType = MapType.normal;
 
   void _onMapTypeButtonPressed() {
+
     setState(() {
       _currentMapType = _currentMapType == MapType.normal
           ? MapType.satellite
@@ -111,6 +142,7 @@ class _MapPageState extends State<MapPage> {
               currentlySelectedPin = sourcePinInfo;
               pinPillPosition = 0;
               closeButtonPosition=0;
+              currentMarker=markerPoint.id;
             });
           }
       ),
@@ -131,6 +163,11 @@ class _MapPageState extends State<MapPage> {
     setState(() {
       pinPillPosition = -800;
       closeButtonPosition=-800;
+      _Post.clear();
+      currentMarker=null;
+      isLoadFeedDone=false;
+      isHavePost=true;
+      currentMarkerInfo= null;
     });
 
   }
@@ -138,10 +175,13 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(body: FutureBuilder(
+    return new Scaffold(
+
+
+        body: FutureBuilder(
       future: getMarker(),
       builder: (BuildContext context, AsyncSnapshot snapShot) {
-        if(_markers.length<=0){
+        if( !isDone){
           return Center(
             child:CircularProgressIndicator(),
           );
@@ -150,173 +190,285 @@ class _MapPageState extends State<MapPage> {
           children: <Widget>[
             _showMap(),
             mapPin(),
-            closeButton(),
           ]
           ,
         );
       },
     )
     );
-    /*return new Scaffold(
-      body: FutureBuilder(
-          future: usersRef.document(userID).get(),
-          builder: (BuildContext context, AsyncSnapshot snapShot) {}
-          body: Stack(
-        children: <Widget>[
-          _showMap(),
-          mapPin(),
-          closeButton(),
-        ],
-      ),
-            ));*/
+
   }
 
-  Widget closeButton()
-  {
-    return AnimatedPositioned(
-      top:closeButtonPosition,
-      right: pinPillPosition,
-      left: 0,
-      duration:Duration(milliseconds: 200) ,
-      child: RawMaterialButton(
-        onPressed: () {
-          _hidePinPos();
-        },
-        child: new Icon(
-          Icons.close,
-          color: Colors.white,
-          size: 20.0,
-        ),
-        shape: new CircleBorder(),
-        elevation: 2.0,
-        fillColor: Colors.blue,
-      ),
-    );
-  }
 
 
 
   Widget mapPin()
   {
-
     return AnimatedPositioned(
-      bottom: pinPillPosition,
+      top:pinPillPosition,
       right: 0,
       left: 0,
       duration: Duration(milliseconds: 200),
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          //margin: EdgeInsets.all(20),
-          height: 650,
-          decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: <BoxShadow>[
-                BoxShadow(blurRadius: 20, offset: Offset.zero, color: Colors.grey.withOpacity(0.5))
-              ]
+      child:  Wrap(
+        direction: Axis.horizontal,
+        children: <Widget>[
+
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              //margin: EdgeInsets.all(20),
+              height: MediaQuery.of(context).size.height-130,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(blurRadius: 20, offset: Offset.zero, color: Colors.grey.withOpacity(0.5))
+                ],
+              ),
+              child: RefreshIndicator(
+                onRefresh:()=> _refreshFeed() ,
+                child:_setUpFeed(),
+
+              ),
+            ),
           ),
-          child:  ListView.builder(
-              addAutomaticKeepAlives: true,
-              itemCount: 100,
-              itemBuilder: (context,i)
-              {
-                if (i.isOdd) {
-                  return Divider(
-                    color: Colors.blue,
-                    thickness: 1.0,
-                  );
-                }
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Padding(
-                            padding: const EdgeInsets.fromLTRB(10,10,10,10),
-                            child: Container(
-                              height:50.0,
-                              width:50.0,
-                              child:  Image.asset(currentlySelectedPin.pinPath ),
-                            )
-                        ),
-                        Text(
-                          'HoTranThienDat',
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
-                    Padding(
-                        padding: const EdgeInsets.fromLTRB(0,0,0,0),
-                        child: Container(
-                          child: Image.network("https://ejoy-english.com/blog/wp-content/uploads/2018/10/Screen-Shot-2017-05-06-at-13.24.02-400x225.png"),
-                        )
-                    ),
-                    Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.favorite_border,
-                          color: Colors.pink,
-                          size: 24.0,
-                          semanticLabel: 'Text to announce in accessibility modes',
-                        ),
-                      ],
-                    ),
-                    Text(
-                      'the weather is gorgeous',
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
-                    ),
+        ],
 
-                  ],
+    )
 
-                );
-              }
-          ),
-            /*(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                child: Row(
-                  children: <Widget>[
-                    RawMaterialButton(
-                      onPressed: () {
-                        _hidePinPos();
-                      },
-                      child: new Icon(
-                        Icons.close,
-                        color: Colors.white,
-                        size: 20.0,
-                      ),
-                      shape: new CircleBorder(),
-                      elevation: 2.0,
-                      fillColor: Colors.blue,
-                    ),
-                  ],
-
-                ),
-              ),*/
-
-
-
-          ),
-        ),
     );
-
   }
 
+  _refreshFeed()  async
+  {
+    setState(() {
+      _Post.clear();
+      isLoadFeedDone=false;
+      isHavePost=true;
+      currentMarkerInfo= new MarkerPoint();
+    });
+    await displayFeed(currentMarker);
+  }
+
+  Widget _setUpFeed()
+  {
+    if(currentMarker==null)
+      {
+        isLoadFeedDone=false;
+        return new Scaffold();
+      }
+
+    return new Scaffold(
+      body:FutureBuilder(
+        future: displayFeed(currentMarker),
+        builder: (BuildContext context, AsyncSnapshot snapShot) {
+
+          if(!isLoadFeedDone){
+            return Center(
+              child:CircularProgressIndicator(),
+            );
+          }
+
+          return CustomScrollView(
+            cacheExtent: 1000,
+              slivers: <Widget>[
+          SliverAppBar(
+            flexibleSpace: FlexibleSpaceBar(
+              centerTitle:true,
+              title: Text(currentMarkerInfo.name,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16.0,
+                  )),
+                  background: Row(
+                  children: <Widget>[
+                       Spacer(),
+                      CircleAvatar(
+                        radius: 54.0,
+                        backgroundImage: AdvancedNetworkImage(
+                        currentMarkerInfo.markerPicture,
+                        useDiskCache: true,
+                        cacheRule: CacheRule(maxAge: const Duration(days: 7)),
+          ),
+                    ),
+                    Spacer(),
+                    ],
+          )
+          ),
+            expandedHeight: 200,
+            floating: false,
+            pinned: true,
+            snap: false,
+            backgroundColor: Colors.black12,
+            actions: <Widget>[
+              FloatingActionButton(
+                backgroundColor: Colors.transparent,
+                child: Icon(
+                  Icons.clear,
+                ),
+                elevation: 0,
+                onPressed: () => {
+                  _hidePinPos()
+                },
+              ),
+            ],
+          ),
+            SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context,index)=>  FutureBuilder(
+              future: DatabaseService.getUserInfo(_Post[index].authorId),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (!snapshot.hasData) {
+                  return Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+                      child: Center(
+                        child: CircularProgressIndicator(),
+                      )
+                  );
+                }
+                User author = snapshot.data;
+                return _buildPost(_Post[index], author);
+              }
+          ),
+            childCount: _Post.length ,
+          )
+          )],
+          );
+        },
+      ),
+    );
+  }
+  Widget _buildPost(User_Feed post, User author){
+
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Row(
+            children: <Widget>[
+              Padding(
+                  padding: const EdgeInsets.fromLTRB(10,10,10,10),
+                  child: Container(
+                    height:50.0,
+                    width:50.0,
+                    child:  GestureDetector(
+                        onTap: () =>Navigator.push(context,
+                        MaterialPageRoute(
+                          builder: (_)=>AboutPage(
+                          userID: author.id ))),
+                        child:CircleAvatar(
+                          radius: 45.0,
+                          backgroundImage:  AdvancedNetworkImage(
+                            author.avatarUrl,
+                            useDiskCache: true,
+                            cacheRule: CacheRule(maxAge: const Duration(days: 7)),
+                          ),
+                        )
+                    ),
+                  )
+              ),
+              Text(
+                author.name,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(0,0,0,0),
+              child: Container(
+                child: Image(
+                  image:AdvancedNetworkImage(
+                    post.imageUrl,
+                    useDiskCache: true,
+                    cacheRule: CacheRule(maxAge: const Duration(days: 7)),
+                  ),
+                ),
+              )
+          ),
+
+          Wrap(
+            direction: Axis.horizontal,
+            children: <Widget>[
+              Padding(
+                  padding: const EdgeInsets.fromLTRB(5,10,0,0),
+                  child: Container(
+                    child:   Text(
+                      author.name,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.left,
+                    ),
+                  )
+              ),
+              Padding(
+                  padding: const EdgeInsets.fromLTRB(5,10,0,0),
+                  child: Container(
+                    child:   Text(
+                      post.caption,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontWeight: FontWeight.normal),
+                      textAlign: TextAlign.left,
+                    ),
+                  )
+              ),
+            ],
+          ),
+          Padding(
+              padding: const EdgeInsets.fromLTRB(5,10,0,0),
+              child: Container(
+                child:   Text(
+                  calculateDate(post.postdate),
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black.withOpacity(0.4),fontSize: 11),
+                  textAlign: TextAlign.left,
+                ),
+              )
+          ),
+
+
+          Divider(),
+
+        ],
+      );
+
+
+
+  }
+  String calculateDate(Timestamp postDate)
+  {
+    String returnDate="";
+    DateTime now = DateTime.now();
+    if(now.year==postDate.toDate().year){
+      if(now.month==postDate.toDate().month){
+        if(now.day==postDate.toDate().day){
+          if(now.hour==postDate.toDate().hour){
+            returnDate=(now.minute-postDate.toDate().minute).toString() + " phút trước";
+          }
+          else{
+            returnDate=(now.hour-postDate.toDate().hour).toString() + " giờ trước";
+          }
+        }
+        else{
+          returnDate=(now.day-postDate.toDate().day).toString() + " ngày trước";
+        }
+      }
+      else{
+        returnDate=(now.month-postDate.toDate().month).toString() + " tháng trước";
+      }
+    }
+    else{
+      returnDate= "ảnh từ "+postDate.toDate().day.toString() +"/"+ postDate.toDate().month.toString()+"/"+ postDate.toDate().year.toString();
+    }
+    return returnDate;
+  }
   Widget _showMap() {
     CameraPosition initialLocation = CameraPosition(
       target: _center,
       zoom: 11.0,
     );
 
-    getDistrict();
     return MaterialApp(
 
       debugShowCheckedModeBanner: false,
@@ -343,6 +495,7 @@ class _MapPageState extends State<MapPage> {
                 child: Column(
                   children: <Widget>[
                     FloatingActionButton(
+                      heroTag: "btn1",
                       onPressed: _onMapTypeButtonPressed,
                       materialTapTargetSize: MaterialTapTargetSize.padded,
                       backgroundColor: Colors.blue.withOpacity(0.7),

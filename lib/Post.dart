@@ -11,6 +11,9 @@ import 'package:weather_app_flutter/Model/User_Info.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'infoweather.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:weather_app_flutter/Model/Marker.dart';
+import 'package:weather_app_flutter/Utilities/Constants.dart';
 
 class PostPage extends StatefulWidget {
 
@@ -24,6 +27,7 @@ class _PostPageState extends State<PostPage> {
   TextEditingController _captionController = TextEditingController();
   String _caption = '';
   bool _isLoading = false;
+  String _markerId='';
   LatLng _center = new LatLng(double.parse(locationInstance.latitude),
       double.parse(locationInstance.longitude));
   _showPickImage()
@@ -31,7 +35,22 @@ class _PostPageState extends State<PostPage> {
     return Platform.isAndroid ? _androidDialog() : _iosSheet();
   }
 
+  getDistrict() async
+  {
+    List<Placemark> placeMark = await Geolocator().placemarkFromCoordinates(_center.latitude,_center.longitude);
+    QuerySnapshot querySnapshot = await markerRef.getDocuments();
+    var list = querySnapshot.documents;
+    for(var i = 0; i < list.length; i++) {
+      MarkerPoint marker = MarkerPoint.fromDoc(list[i]);
+      if(marker.name==placeMark[0].subAdministrativeArea)
+        {
+          _markerId= MarkerPoint.fromDoc(list[i]).id;
+        }
 
+      print(_markerId);
+    }
+
+  }
 
   _androidDialog(){
     showDialog(
@@ -64,8 +83,6 @@ class _PostPageState extends State<PostPage> {
   }
 
 
-
-
    _handleImage(ImageSource source) async{
     Navigator.of(context, rootNavigator: true).pop();
     File imageFile = await ImagePicker.pickImage(source: source);
@@ -87,16 +104,18 @@ class _PostPageState extends State<PostPage> {
         _isLoading=true;
 
       });
+      getDistrict();
       //Tao bai dang
       String imageUrl = await StorageService.uploadPost(_image);
       User_Feed post= User_Feed(
         imageUrl: imageUrl,
         caption: _caption,
         likes: {},
-        markerId: '',
+        markerId: _markerId,
         authorId: Provider.of<UserData>(context).currentUserId,
         postdate: Timestamp.fromDate(DateTime.now()),
       );
+
 
       DatabaseService.createPost(post);
 
@@ -142,6 +161,7 @@ class _PostPageState extends State<PostPage> {
     );
   }
   Widget build(BuildContext context) {
+
     final width=MediaQuery.of(context).size.width;
     final height=MediaQuery.of(context).size.height;
     return new Scaffold(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './Root_page.dart';
 import 'package:weather_app_flutter/Services/Authentication.dart';
-
+import 'package:peek_and_pop/misc.dart' as PeekAndPopMisc;
 void main() {
   runApp(new Login());
   //runApp(MyApp1());
@@ -19,12 +19,15 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return new MaterialApp(
-        title: 'Flutter Login Demo',
-        theme: new ThemeData(
-          primarySwatch: Colors.blue,
+    return RepaintBoundary(
+        key: PeekAndPopMisc.background,
+        child: new MaterialApp(
+          title: 'Flutter Login Demo',
+          theme: new ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: new RootPage(auth: new Auth()),
         ),
-        home: new RootPage(auth: new Auth()),
     );
   }
 }

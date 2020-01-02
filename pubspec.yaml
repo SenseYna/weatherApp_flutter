@@ -45,6 +45,9 @@ dependencies:
   path_provider: ^1.5.1
   cached_network_image: ^2.0.0-rc
   uuid: ^2.0.4
+  flutter_advanced_networkimage: ^0.6.2
+  animator: ^1.0.0+3
+  peek_and_pop: ^1.0.3
 dev_dependencies:
   flutter_test:
     sdk: flutter

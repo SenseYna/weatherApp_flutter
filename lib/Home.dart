@@ -37,9 +37,10 @@ class _HomePageState extends State<HomePage> {
                           bottomLeft: const Radius.circular(20.0),
                           bottomRight: const Radius.circular(20.0)),
                     ),
-                    child: new Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
+                    child: new Wrap(
+                      direction: Axis.horizontal,
+                     // crossAxisAlignment: CrossAxisAlignment.start,
+                      //mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[WeatherWidget()],
                     )),
               )
