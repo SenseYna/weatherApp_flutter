@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_app_flutter/Services/Authentication.dart';
+import 'dart:async';
+import 'infoweather.dart';
 
 class LoginPage extends StatefulWidget {
 
@@ -23,6 +25,7 @@ class _LoginPageState extends State<LoginPage>{
 
   bool _isLoginForm=true;
   bool _isLoading=false;
+  bool _isDelayForLoading=false;
 
 
   bool validateAndSave() {
@@ -35,7 +38,7 @@ class _LoginPageState extends State<LoginPage>{
   }
 
   void validateAndSubmit() async
-  {
+  { 
     setState(() {
       _errorMessage = "";
       _isLoading = true;
@@ -72,7 +75,6 @@ class _LoginPageState extends State<LoginPage>{
     }
   }
 
-
   void resetForm() {
     _formKey.currentState.reset();
     _errorMessage = "";
@@ -88,9 +90,26 @@ class _LoginPageState extends State<LoginPage>{
     });
   }
 
+Future sleep1() {
+  return new Future.delayed(const Duration(seconds: 3), () => "1R");
+}
+
+  delayLoading() async {
+      await sleep1();
+      _isDelayForLoading = true;
+
+    setState(() {});
+  }
 
   @override
+  void initState() {
+    super.initState();
+    delayLoading();
+  }
   Widget build(BuildContext context) {
+    
+
+  
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Flutter login demo"),
@@ -102,9 +121,13 @@ class _LoginPageState extends State<LoginPage>{
         ],
       ),
     );
+  
+    
   }
+  
 
   Widget _showForm() {
+    
     return new Container(
         padding: EdgeInsets.all(16.0),
         child: new Form(

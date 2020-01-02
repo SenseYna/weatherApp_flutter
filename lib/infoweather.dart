@@ -134,9 +134,22 @@ class Weather {
     nextTime.temperature = (data[nextHour]['temperature']);
     nextTime.uvIndex = data[nextHour]['uvIndex'];
 
-    for (int i = 0; i < 24; i++) {
-      temperatures.add(data[i]['temperature'] * 1.0);
+  int now_time = TimeOfDay.now().hour;
+  int temp = now_time - 12;
+  int now_time_temp = 24 - now_time;
+  for (int i = temp+temp; i > 0; i--) {
+      temperatures.add(data[now_time_temp++]['temperature'] * 1.0);
     }
+
+  now_time_temp = now_time;
+    for (int i = 0; i < now_time-temp-temp; i++) {
+      temperatures.add(data[now_time_temp++]['temperature'] * 1.0);
+    }
+  now_time_temp = 0;
+    for (int i = now_time; i < 24; i++) {
+      temperatures.add(data[now_time_temp++]['temperature'] * 1.0);
+    }
+
   }
 
   fetchData(String lat, String lon) async {

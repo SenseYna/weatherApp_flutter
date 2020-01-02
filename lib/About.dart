@@ -16,15 +16,12 @@ import 'EditProfile.dart';
 import 'package:weather_app_flutter/Widget/PostView.dart';
 
 class AboutPage extends StatefulWidget {
-
   AboutPage({this.auth,this.logoutCallback,this.userID});
   final BaseAuth auth;
   final VoidCallback logoutCallback;
   final String userID;
   @override
   _AboutPageState createState() => _AboutPageState(auth: auth,logoutCallback: logoutCallback,userID: userID);
-
-
 }
 
 class _AboutPageState extends State<AboutPage> {

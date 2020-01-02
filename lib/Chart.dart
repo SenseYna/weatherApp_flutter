@@ -26,8 +26,8 @@ class _ChartPageState extends State<ChartPage> {
     }
     weatherInstance = _weather;
     List<Sales> datatemperature = new List();
-
-    for (int i = 1; i < 24; i++) {
+    
+    for (int i = 0; i < 24; i++) {
       datatemperature.add(Sales(i, _weather.temperatures[i]));
     }
 
@@ -36,7 +36,6 @@ class _ChartPageState extends State<ChartPage> {
       charts.Series(
         colorFn: (__, _) => charts.ColorUtil.fromDartColor(Color(0xffff9900)),
         id: 'Air Pollution',
-        //data: datatemperature,
         data: datatemperature,
         domainFn: (Sales sales, _) => sales.yearval,
         measureFn: (Sales sales, _) => sales.salesval,

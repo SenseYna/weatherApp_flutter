@@ -65,33 +65,8 @@ class _MyApp1State extends State<MyApp1> {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Column(
-            //mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-                height: 590.0,
-                width: 600.0,
-                decoration: BoxDecoration(
-
-                  // image: DecorationImage(image: NetworkImage(image))),
-                    image: DecorationImage(
-                        image: AssetImage('assets/images/cloud1.jpg'),
-                        fit: BoxFit.fitHeight)),
-                child: Container(
-                  margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-                  height: 700.0,
-                  width: 600.0,
-                  decoration: BoxDecoration(
-
-                    // image: DecorationImage(image: NetworkImage(image))),
-                      image: DecorationImage(
-                          image: AssetImage('assets/images/logo-eureka.png'))),
-                ),
-              ),
-            ],
-          ),
-        ),
+         child: CircularProgressIndicator())
+         
       ),
     );
   }
