@@ -6,6 +6,8 @@ import 'package:weather_app_flutter/Model/User_Info.dart';
 import 'package:provider/provider.dart';
 import 'HomePage.dart';
 
+bool _isDelayForLoading=false;
+
 enum AuthStatus {
   NOT_DETERMINED,
   NOT_LOGGED_IN,
@@ -25,9 +27,23 @@ class _RootPageState extends State<RootPage> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = "";
 
+  Future sleep1() {
+  return new Future.delayed(const Duration(seconds: 3), () => "1");
+}
+
+  delayLoading() async {
+      await sleep1();
+      _isDelayForLoading = true;
+
+    setState(() {});
+  }
+
   @override
   void initState() {
     super.initState();
+
+    delayLoading();
+    
     widget.auth.getCurrentUser().then((user) {
       setState(() {
         if (user != null) {
@@ -68,28 +84,62 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
-    switch (authStatus) {
-      case AuthStatus.NOT_DETERMINED:
-        return buildWaitingScreen();
-        break;
-      case AuthStatus.NOT_LOGGED_IN:
-        return new LoginPage(
-          auth: widget.auth,
-          loginCallback: loginCallback,
-        );
-        break;
-      case AuthStatus.LOGGED_IN:
-        if (_userId.length > 0 && _userId != null) {
-          return new MyApp1(
-            userId:_userId,
-            auth: widget.auth,
-            logoutCallback: logoutCallback,
-          );
-        } else
+    if (_isDelayForLoading == true){
+      switch (authStatus) {
+        case AuthStatus.NOT_DETERMINED:
           return buildWaitingScreen();
-        break;
-      default:
-        return buildWaitingScreen();
+          break;
+        case AuthStatus.NOT_LOGGED_IN:
+          return new LoginPage(
+            auth: widget.auth,
+            loginCallback: loginCallback,
+          );
+          break;
+        case AuthStatus.LOGGED_IN:
+          if (_userId.length > 0 && _userId != null) {
+            return new MyApp1(
+              userId:_userId,
+              auth: widget.auth,
+              logoutCallback: logoutCallback,
+            );
+          } else
+            return buildWaitingScreen();
+          break;
+        default:
+          return buildWaitingScreen();
+      }
     }
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Column(
+            //mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                height: 590.0,
+                width: 600.0,
+                decoration: BoxDecoration(
+
+                  // image: DecorationImage(image: NetworkImage(image))),
+                    image: DecorationImage(
+                        image: AssetImage('assets/images/cloud1.jpg'),
+                        fit: BoxFit.fitHeight)),
+                child: Container(
+                  margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                  height: 700.0,
+                  width: 600.0,
+                  decoration: BoxDecoration(
+
+                    // image: DecorationImage(image: NetworkImage(image))),
+                      image: DecorationImage(
+                          image: AssetImage('assets/images/logo-eureka.png'))),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

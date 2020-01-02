@@ -10,15 +10,12 @@ import 'EditProfile.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class AboutPage extends StatefulWidget {
-
   AboutPage({this.auth,this.logoutCallback,this.userID});
   final BaseAuth auth;
   final VoidCallback logoutCallback;
   final String userID;
   @override
   _AboutPageState createState() => _AboutPageState(auth: auth,logoutCallback: logoutCallback,userID: userID);
-
-
 }
 
 class _AboutPageState extends State<AboutPage> {
@@ -118,8 +115,9 @@ class _AboutPageState extends State<AboutPage> {
                                 fontWeight: FontWeight.w600,
                               )
                               ),
-                              Text('Bài đăng',
+                              Text('Bài viết',
                                   style: TextStyle(
+                                    fontSize: 16.0,
                                     color: Colors.black54,
                                   )
                               )
@@ -132,8 +130,9 @@ class _AboutPageState extends State<AboutPage> {
                                 fontWeight: FontWeight.w600,
                               )
                               ),
-                              Text('Người theo dõi',
+                              Text('Người th...',
                                   style: TextStyle(
+                                    fontSize: 16.0,
                                     color: Colors.black54,
                                   )
                               )
@@ -146,8 +145,9 @@ class _AboutPageState extends State<AboutPage> {
                                 fontWeight: FontWeight.w600,
                               )
                               ),
-                              Text('Đang theo dõi',
+                              Text('Đang the...',
                                   style: TextStyle(
+                                    fontSize: 16.0,
                                     color: Colors.black54,
                                   )
                               )
@@ -159,8 +159,10 @@ class _AboutPageState extends State<AboutPage> {
                           width: 250.0,
                           child:FlatButton(
                             child: Text('Chỉnh sửa thông tin',
-                              style: TextStyle(fontSize: 18.0,color: Colors.white),
-
+                              style: TextStyle(
+                                fontSize: 16.0, 
+                                color: Colors.white
+                                ),
                             ),
                             color: Colors.blue,
                             onPressed: (){

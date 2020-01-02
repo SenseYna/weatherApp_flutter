@@ -172,8 +172,8 @@ class _WeatherWidgetState extends State<WeatherWidget> {
                           ),
                         ),
                         Container(
-                          margin: EdgeInsets.fromLTRB(20.0, 20.0, 0.0, 0.0),
-                          padding: EdgeInsets.fromLTRB(0.0, 13.0, 0.0, 0.0),
+                          margin: EdgeInsets.fromLTRB(5.0, 20.0, 0.0, 0.0),
+                          padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 0.0),
                           width: 118.0,
                           height: 94.0,
                           child: Row(
