@@ -12,16 +12,20 @@ import 'Model/User_Info.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'Model/User.dart';
 import 'EditProfile.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:weather_app_flutter/Widget/PostView.dart';
 
 class AboutPage extends StatefulWidget {
+
   AboutPage({this.auth,this.logoutCallback,this.userID});
   final BaseAuth auth;
   final VoidCallback logoutCallback;
   final String userID;
   @override
   _AboutPageState createState() => _AboutPageState(auth: auth,logoutCallback: logoutCallback,userID: userID);
+
+
 }
 
 class _AboutPageState extends State<AboutPage> {
@@ -32,7 +36,7 @@ class _AboutPageState extends State<AboutPage> {
   final String userID;
   User user;
   List<User_Feed> _posts=[];
-  int _postView=1;
+  int _postView=0;
   Timer _showDialogTimer;
   bool _dialogVisible = false;
   User_Feed currentPost;
@@ -61,7 +65,7 @@ class _AboutPageState extends State<AboutPage> {
           user=User.fromDoc(snapShot.data);
           final layers = <Widget>[];
           layers.add(showProfile());
-          if(_dialogVisible) {
+          if(_dialogVisible  && currentPost!=null) {
             layers.add(_buildDialog(currentPost));
           }
           //User user = User.fromDoc(snapShot.data);
@@ -80,11 +84,6 @@ class _AboutPageState extends State<AboutPage> {
           return Container(
             child: new Wrap(
               children: <Widget>[
-                new ListTile(
-                    leading: new Icon(Icons.add_circle_outline),
-                    title: new Text('Thêm tài khoản'),
-                    onTap: () => {}
-                ),
                 new ListTile(
                   leading: new Icon(Icons.remove_circle_outline),
                   title: new Text('Đăng xuất'),
@@ -388,7 +387,7 @@ class _AboutPageState extends State<AboutPage> {
   Widget _buildDialog(User_Feed post) {
     return Container(
       color: Colors.black.withOpacity(0.7),
-      padding: EdgeInsets.fromLTRB( 0, 50,0, 250),
+      padding: EdgeInsets.fromLTRB( 0, 50,0, 200),
       child:  BackdropFilter(
             filter: ImageFilter.blur(
               sigmaX: 5,
@@ -410,7 +409,7 @@ class _AboutPageState extends State<AboutPage> {
                 child:  Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Row(
                   children: <Widget>[
@@ -466,27 +465,18 @@ class _AboutPageState extends State<AboutPage> {
                     Padding(
                         padding: const EdgeInsets.fromLTRB(5,10,0,0),
                         child: Container(
-                          child:   Text(
-                            post.caption,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontWeight: FontWeight.normal),
-                            textAlign: TextAlign.left,
-                          ),
+                          child: FittedBox(
+                            child:AutoSizeText(
+                                post.caption,
+                                style: TextStyle(fontWeight: FontWeight.normal),
+                                maxLines: 3,
+                            )
+                          )
                         )
                     ),
                   ],
                 ),
-                Padding(
-                    padding: const EdgeInsets.fromLTRB(5,10,0,0),
-                    child: Container(
-                      child:   Text(
-                        calculateDate( post.postdate),
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontWeight: FontWeight.normal,color: Colors.black.withOpacity(0.4),fontSize: 11),
-                        textAlign: TextAlign.left,
-                      ),
-                    )
-                ),
+
 
 
               ],

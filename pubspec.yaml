@@ -48,6 +48,7 @@ dependencies:
   flutter_advanced_networkimage: ^0.6.2
   animator: ^1.0.0+3
   peek_and_pop: ^1.0.3
+  auto_size_text: ^2.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
