@@ -7,7 +7,7 @@
 - Lớp: SE346.K12.PMCL Học kì 2019-2020
 - Giáo viên: Mr. Huỳnh Tuấn Anh [Github](https://github.com/anhhna/ "Github")
 - Link dowload CH Play: [Download](https://play.google.com/store/apps/details?id=com.something.weather_app_flutter&fbclid=IwAR2bdLIzljvKH2powfC4sRs0zmClOQWFtQtESCCN1q9cGD77eKEgW0WncqY)
-- Link apk: [Download](https://bit.ly/2SXM78C)
+- Link apk: [Download](https://drive.google.com/open?id=1V3Wo_iTOzVgeqOika_u4XTBVNd0z3F7U)
 ## Giới thiệu :
 - Bạn quan tâm về thời tiết? Bạn muốn biết chỉ số tia UV khi ra đường? Ứng dụng Now Temp sẽ giúp bạn điều ấy. Ứng dụng giúp bạn theo dõi được nhiệt dộ và chỉ số UV trên điện thoại di động của mình. Now Temp giúp bạn có được thông tin nhiệt dộ UV mọi lúc mọi nơi
 - Các công nghệ về thời tiết hiện nay đều đã lỗi thời từ giao diện đến nhu cầu người dùng, do đó ứng dụng của chúng tôi tích hợp giữa mạng xã hội người dùng để chia sẻ về thông tin thời tiết và tiện lợi trao đổi với nhau mà không có bất cứ rào cản nào, đặc biệt là tính trực quan của ứng dụng.
